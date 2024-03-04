@@ -1,14 +1,16 @@
-import { styled } from 'styled-components';
-
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 
+import styled from 'styled-components';
+
 export const StyledHeader = styled.header`
+  cursor: default;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  height: ${({ theme }) => theme.spaces.xmmmm}px;
+  height: ${({ theme }) => theme.spaces.xx};
 
   background: rgb(0 0 0);
   background: linear-gradient(
@@ -20,17 +22,17 @@ export const StyledHeader = styled.header`
 `;
 
 export const StyledHeaderText = styled.h1`
-  font-size: 38px;
-  color: rgb(0 206 44);
-  color: linear-gradient(
-    180deg,
-    rgb(0 206 44 / 100%) 0%,
-    rgb(174 223 35 / 100%) 3%,
-    rgb(163 220 0 / 100%) 72%
-  );
+  font-size: ${({ theme }) => theme.spaces.xmm};
+  font-weight: 600;
+  color: transparent;
+
+  background-image: linear-gradient(90.18deg, #00ce2c 0.18%, #aedf23 49.3%, #a3dc00 99.88%);
+  background-clip: text;
 `;
 
 export const StyledHeaderSubText = styled.h3`
   font-size: 12px;
-  color: ${({ theme }) => theme.colors.gray};
+  font-weight: 300;
+  color: ${({ theme }) => theme.colors.gray1};
+  text-shadow: ${({ theme }) => theme.shadow.header};
 `;

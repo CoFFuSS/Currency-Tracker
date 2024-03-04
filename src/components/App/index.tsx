@@ -4,11 +4,11 @@ import { ThemeProvider } from 'styled-components';
 import { observer } from 'mobx-react-lite';
 
 import themeSwitcher from '@/store';
-import { GlobalStyle } from '@/theme';
 import { ROUTES } from '@/constants/routes';
 import { BasicLayout } from '@/components/BasicLayout';
+import { GlobalStyle } from '@/components/GlobalStyle';
 
-export const App = observer(() => (
+const App = observer(() => (
   <ThemeProvider theme={themeSwitcher.theme}>
     <GlobalStyle />
     <Routes>
@@ -27,3 +27,5 @@ export const App = observer(() => (
     </Routes>
   </ThemeProvider>
 ));
+
+export default App;

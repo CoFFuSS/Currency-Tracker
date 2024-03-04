@@ -142,6 +142,13 @@
     "no-underscore-dangle": "off",
     "no-fallthrough": "warn",
 
-    "prettier/prettier": "warn"
+    "prettier/prettier": "warn",
+		"settings": {
+		"import-resolver": {
+			"alias": {
+				"map": [["@", "./src"]]
+			}
+		}
+	}
   }
 }

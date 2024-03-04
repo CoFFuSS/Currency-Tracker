@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 export const PageWrapper = styled.div`
   margin: 0 auto;
-  background-color: ${({ theme }) => theme.backgroundColor};
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const PageContainer = styled.div`
-  max-width: ${({ theme }) => theme.endPoints.maxContentWidth}px;
+  max-width: ${({ theme }) => theme.breakpoints.xl}px;
   margin: 0 auto;
 `;
