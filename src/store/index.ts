@@ -2,10 +2,10 @@ import { makeAutoObservable } from 'mobx';
 
 import { darkTheme, lightTheme } from '@/theme';
 
-import { ITheme } from '@/types/theme_interface';
+import { DefaultTheme } from 'styled-components';
 
 class ThemeSwitcher {
-  private _theme: ITheme = darkTheme;
+  private _theme: DefaultTheme = darkTheme;
 
   constructor() {
     makeAutoObservable(this);

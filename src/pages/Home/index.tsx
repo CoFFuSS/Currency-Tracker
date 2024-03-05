@@ -1,6 +1,8 @@
+import { StyledH1 } from './styled';
+
 export const HomePage = (): JSX.Element => (
   <>
-    <h1>Welcome to my home page</h1>
+    <StyledH1>Welcome to my home page</StyledH1>
     <h3>Or you dont like my page</h3>
   </>
 );

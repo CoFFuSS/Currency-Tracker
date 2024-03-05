@@ -5,6 +5,8 @@ export const THEME_COLORS = {
   gray2: '#898989',
   gray3: '#202025',
   blue: '#A7B2C3',
+  black: '#000000',
+  white: '#FFFFFF',
 };
 
 export const THEME_BREAKPOINTS = {
@@ -12,10 +14,12 @@ export const THEME_BREAKPOINTS = {
   sm: '576px',
   lg: '992px',
   xl: '1200px',
+  mw: '1546px',
 };
 
 export const THEME_BOX_SHADOWS = {
-  header: '0px 3.054473876953125px 3.054473876953125px 0px #00000080',
+  header: '0px 0px 3px #000000',
+  subheader: '0px 3px 3px #00000080',
 };
 
 export const THEME_SPACES = {
@@ -27,10 +31,13 @@ export const THEME_SPACES = {
   m: '24px',
   xm: '30px',
   xmm: '40px',
-	xl: '48px',
+  xl: '48px',
   l: '72px',
   x: '100px',
-	xx: '200px',
+  xx: '200px',
+  em: '300px',
+  e: '400px',
+  h: '1100px',
 };
 
 export const THEME_FONT_FAMILIES = {
@@ -40,7 +47,21 @@ export const THEME_FONT_FAMILIES = {
 export const THEME_FONTS_SIZE = {
   xs: '12px',
   s: '20px',
+  mss: '26px',
   ms: '32px',
   m: '36px',
   xl: '76px',
+};
+
+export const THEME_LINEAR_GRADIENT = {
+  header: '67deg, rgb(0 0 0 / 100%) 0%, rgb(25 54 34 / 100%) 60%, rgb(18 18 18 / 100%) 100%',
+  headerText: '90.18deg, #00ce2c 0.18%, #aedf23 49.3%, #a3dc00 99.88%',
+};
+
+export const THEME_FONT_WEIGHT = {
+  light: '100',
+  regular: '400',
+  medium: '500',
+  semibold: '600',
+  bold: '700',
 };

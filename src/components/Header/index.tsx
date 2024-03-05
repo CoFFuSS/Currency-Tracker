@@ -1,9 +1,30 @@
-import { StyledHeaderText, StyledHeader, StyledHeaderSubText } from './styled';
+import {
+  StyledHeaderText,
+  StyledHeader,
+  StyledHeaderSubText,
+  StyledLogoContainer,
+  StyledHeaderLogo,
+  StyledHeaderTextContainer,
+  StyledHeaderContainer,
+} from './styled';
 
 export const Header = (): JSX.Element => (
   <StyledHeader>
-    <StyledHeaderText>Modsen Currency</StyledHeaderText>
-    <StyledHeaderText>Tracker</StyledHeaderText>
-    <StyledHeaderSubText>Cotacão do dólar e outras moedas internacionais.</StyledHeaderSubText>
+    <StyledHeaderContainer>
+      <StyledHeaderTextContainer>
+        <StyledHeaderText>
+          Modsen Currency <br />
+          Tracker
+        </StyledHeaderText>
+        <StyledHeaderSubText>
+          Quotes for the dollar and other <br />
+          international currencies.
+        </StyledHeaderSubText>
+      </StyledHeaderTextContainer>
+
+      <StyledLogoContainer>
+        <StyledHeaderLogo />
+      </StyledLogoContainer>
+    </StyledHeaderContainer>
   </StyledHeader>
 );

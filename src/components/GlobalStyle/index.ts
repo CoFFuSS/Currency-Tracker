@@ -7,15 +7,24 @@ export const GlobalStyle = createGlobalStyle`
 
 body{
     overflow-x: hidden;
-
     box-sizing:border-box;
     margin: 0;
     padding: 0; 
 
-    font-family: Poppins, sans-serif;
 }
 
 h1,h2,h3,h4,h5 {
     margin: 0;
+}
+
+:root {
+	align-content: center;
+
+	max-width: 1546px;
+	margin: 0 auto;
+
+	font-family: Poppins, sans-serif;
+
+	background-color: ${({ theme }) => theme.colors.primary};
 }
 `;

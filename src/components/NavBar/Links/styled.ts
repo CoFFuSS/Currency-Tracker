@@ -9,7 +9,7 @@ export const StyledLink = styled(Link)`
 
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     margin-right: auto;
-    font-size: ${({ theme }) => theme.fontSize.m};
+    font-size: ${({ theme }) => theme.fontSize.s};
   }
 `;
 
@@ -17,5 +17,5 @@ export const LinkContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-	width: 70%;
+  width: 70%;
 `;
