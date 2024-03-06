@@ -6,6 +6,7 @@ export interface ITheme {
     gray1: string;
     gray2: string;
     gray3: string;
+    gray4: string;
     blue: string;
     black: string;
     white: string;
@@ -15,7 +16,7 @@ export interface ITheme {
     sm: string;
     lg: string;
     xl: string;
-		mw: string;
+    mw: string;
   };
   shadow: {
     header: string;
@@ -31,17 +32,22 @@ export interface ITheme {
     xm: string;
     xmm: string;
     xl: string;
+    xls: string;
+    l: string;
     x: string;
     xx: string;
+    xxl: string;
     em: string;
     e: string;
     h: string;
   };
   fontFamilies: {
     primary: string;
+    subHeader: string;
   };
   fontSize: {
     xs: string;
+    ss: string;
     s: string;
     mss: string;
     ms: string;

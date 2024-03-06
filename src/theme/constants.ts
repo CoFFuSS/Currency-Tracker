@@ -4,6 +4,7 @@ export const THEME_COLORS = {
   gray1: '#D9D9D9',
   gray2: '#898989',
   gray3: '#202025',
+  gray4: '#607D94',
   blue: '#A7B2C3',
   black: '#000000',
   white: '#FFFFFF',
@@ -32,9 +33,11 @@ export const THEME_SPACES = {
   xm: '30px',
   xmm: '40px',
   xl: '48px',
+	xls: '54px',
   l: '72px',
   x: '100px',
   xx: '200px',
+  xxl: '150px',
   em: '300px',
   e: '400px',
   h: '1100px',
@@ -42,10 +45,12 @@ export const THEME_SPACES = {
 
 export const THEME_FONT_FAMILIES = {
   primary: 'Poppins',
+  subHeader: 'Poppins, system-ui',
 };
 
 export const THEME_FONTS_SIZE = {
   xs: '12px',
+  ss: '16px',
   s: '20px',
   mss: '26px',
   ms: '32px',

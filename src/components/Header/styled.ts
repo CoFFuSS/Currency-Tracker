@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Logo from '@/assets/images/HeaderLogo.svg';
 
-export const StyledHeader = styled.header`
+export const HeaderContainer = styled.header`
   cursor: default;
 
   display: flex;
@@ -18,11 +18,14 @@ export const StyledHeader = styled.header`
   background: linear-gradient(${({ theme }) => theme.linearGradient.header});
 
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+    justify-content: flex-start;
     height: ${({ theme }) => theme.spaces.e};
   }
 `;
 
-export const StyledHeaderText = styled.h1`
+export const MainText = styled.p`
+  margin: 0 auto;
+
   font-size: ${({ theme }) => theme.spaces.xmm};
   font-weight: ${({ theme }) => theme.fontWeight.semibold};
   color: transparent;
@@ -34,14 +37,17 @@ export const StyledHeaderText = styled.h1`
   filter: drop-shadow(${({ theme }) => theme.shadow.header});
 
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+    margin-right: ${({ theme }) => theme.spaces.xl};
     font-size: ${({ theme }) => theme.fontSize.xl};
     text-align: right;
   }
 `;
 
-export const StyledHeaderSubText = styled.p`
-  margin-top: ${({ theme }) => theme.spaces.m};
+export const SubText = styled.p`
+  margin: 0 auto;
+  margin-top: 0;
 
+  font-family: ${({ theme }) => theme.fontFamilies.subHeader};
   font-size: ${({ theme }) => theme.fontSize.xs};
   font-weight: ${({ theme }) => theme.fontWeight.light};
   line-height: ${({ theme }) => theme.spaces.m};
@@ -51,16 +57,12 @@ export const StyledHeaderSubText = styled.p`
   word-break: normal;
 
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    width: 450px;
-
     font-size: ${({ theme }) => theme.fontSize.mss};
     line-height: ${({ theme }) => theme.spaces.xl};
-    text-align: right;
-    text-align-last: center;
   }
 `;
 
-export const StyledLogoContainer = styled.div`
+export const LogoContainer = styled.div`
   display: none;
   width: ${({ theme }) => theme.spaces.mss}px;
   height: ${({ theme }) => theme.spaces.mss}px;
@@ -84,19 +86,43 @@ export const StyledHeaderLogo = styled(Logo)`
   }
 `;
 
-export const StyledHeaderTextContainer = styled.div`
+export const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+    align-items: end;
+  }
+`;
+
+export const MainTextContainer = styled.div`
   display: flex;
   flex-direction: column;
 
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     align-items: end;
-    margin-right: 24px;
   }
 `;
 
-export const StyledHeaderContainer = styled.div`
+export const SubTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+    align-items: end;
+  }
+`;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: ${({ theme }) => theme.spaces.xxl};
+
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     display: flex;
     flex-direction: row;
+    height: ${({ theme }) => theme.spaces.em};
+    margin-left: ${({ theme }) => theme.spaces.l};
   }
 `;
