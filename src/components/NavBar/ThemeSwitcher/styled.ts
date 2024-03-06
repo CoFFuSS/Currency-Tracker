@@ -7,7 +7,7 @@ export const ToggleSwitch = styled.div<{ checked: boolean }>`
 
   position: relative;
 
-  width: 30px;
+  width: ${({ theme }) => theme.spaces.xm};
   height: 15px;
 
   background-color: ${({ theme }) => theme.colors.primary};
@@ -20,12 +20,12 @@ export const ToggleSwitch = styled.div<{ checked: boolean }>`
     content: '';
 
     position: absolute;
-    left: ${({ checked }) => (checked ? 'calc(100% - 50%)' : '0px')};
+    left: ${({ checked }) => (checked ? 'calc(100% - 48%)' : '-1px')};
 
-    width: 15px;
-    height: 15px;
+    width: ${({ theme }) => theme.specialSpaces.ms};
+    height: ${({ theme }) => theme.specialSpaces.ms};
 
-    background-color: ${({ theme }) => theme.colors.secondary};
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
     border-radius: 50%;
 
     transition:
@@ -38,8 +38,8 @@ export const ToggleSwitch = styled.div<{ checked: boolean }>`
     height: ${({ theme }) => theme.spaces.m};
 
     &::before {
-      width: ${({ theme }) => theme.spaces.m};
-      height: ${({ theme }) => theme.spaces.m};
+      width: ${({ theme }) => theme.specialSpaces.ml};
+      height: ${({ theme }) => theme.specialSpaces.ml};
     }
   }
 `;

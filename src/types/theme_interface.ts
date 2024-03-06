@@ -7,6 +7,7 @@ export interface ITheme {
     gray2: string;
     gray3: string;
     gray4: string;
+    gray5: string;
     blue: string;
     black: string;
     white: string;
@@ -16,6 +17,7 @@ export interface ITheme {
     sm: string;
     lg: string;
     xl: string;
+    xl_compare: string;
     mw: string;
   };
   shadow: {
@@ -28,6 +30,7 @@ export interface ITheme {
     s: string;
     mss: string;
     ms: string;
+    mm: string;
     m: string;
     xm: string;
     xmm: string;
@@ -49,6 +52,7 @@ export interface ITheme {
     xs: string;
     ss: string;
     s: string;
+    sm: string;
     mss: string;
     ms: string;
     m: string;
@@ -64,5 +68,10 @@ export interface ITheme {
     medium: string;
     semibold: string;
     bold: string;
+  };
+  specialSpaces: {
+    ms: string;
+    m: string;
+    ml: string;
   };
 }

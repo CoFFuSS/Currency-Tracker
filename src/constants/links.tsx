@@ -17,18 +17,4 @@ export const options = {
       name: 'TimeLine',
     },
   ],
-  FOOTER_ROUTS: [
-    {
-      to: 'general',
-      name: 'General',
-    },
-    {
-      to: 'product',
-      name: 'Product',
-    },
-    {
-      to: 'community',
-      name: 'Community',
-    },
-  ],
 };

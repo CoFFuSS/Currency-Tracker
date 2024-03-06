@@ -1,10 +1,13 @@
 import styled from 'styled-components';
+import Icon from '@/assets/images/Down_Arrow.svg';
+
 export const Container = styled.div`
   cursor: pointer;
 
   display: flex;
-  gap: 15px;
+  gap: ${({ theme }) => theme.specialSpaces.m};
   align-items: center;
+  justify-content: space-between;
 
   height: ${({ theme }) => theme.spaces.xls};
   margin-right: ${({ theme }) => theme.spaces.xmm};
@@ -19,17 +22,21 @@ export const Content = styled.div<{ isOpen: boolean }>`
   margin-right: ${({ theme }) => theme.spaces.xmm};
   margin-left: ${({ theme }) => theme.spaces.xmm};
 
-  line-height: 24px;
+  line-height: ${({ theme }) => theme.spaces.m};
 
   background-color: ${({ theme }) => theme.colors.primary};
 `;
 
-export const InnerText = styled.p`
+export const InnerText = styled.div`
   font-size: ${({ theme }) => theme.fontSize.xs};
-  color: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.gray5};
 `;
 
 export const TitleText = styled.span`
   font-size: ${({ theme }) => theme.fontSize.ss};
   color: ${({ theme }) => theme.colors.secondary};
+`;
+
+export const StyledArrow = styled(Icon)`
+  fill: ${({ theme }) => theme.colors.secondary};
 `;

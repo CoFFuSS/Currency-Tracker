@@ -1,17 +1,14 @@
-import { ExpandableField } from '@/components/ExpandableField';
+import useWindowDimensions from '@/utils/useWindowDimensions';
+import themeSwitcher from '@/store';
+import { MobileFooter } from './MobileFooter';
 import { Container } from './styled';
+import { DesktopFooter } from './DesktopFooter';
 
 export const Footer = () => {
+  const { width } = useWindowDimensions();
   return (
     <Container>
-      <ExpandableField
-        title='Modsen Currency Tracker'
-        content="Since then, the company has grown organically to. Starsup is the world's largest trading platform, with $12 billion worth of currency trading and 500,000 tickets sold daily to tens of thousands of traders worldwide."
-      />
-      <ExpandableField
-        title='General'
-        content='Market'
-      />
+      {width > +themeSwitcher.theme.breakpoints.xl_compare ? <DesktopFooter /> : <MobileFooter />}
     </Container>
   );
 };

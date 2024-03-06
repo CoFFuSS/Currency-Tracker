@@ -64,8 +64,8 @@ export const SubText = styled.p`
 
 export const LogoContainer = styled.div`
   display: none;
-  width: ${({ theme }) => theme.spaces.mss}px;
-  height: ${({ theme }) => theme.spaces.mss}px;
+  width: ${({ theme }) => theme.spaces.mss};
+  height: ${({ theme }) => theme.spaces.mss};
 
   @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
     display: flex;

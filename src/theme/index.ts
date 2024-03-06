@@ -8,6 +8,7 @@ import {
   THEME_FONT_WEIGHT,
   THEME_LINEAR_GRADIENT,
   THEME_SPACES,
+  THEME_SPACIAL_SPACES,
 } from './constants';
 
 const BasicTheme: ITheme = {
@@ -20,20 +21,22 @@ const BasicTheme: ITheme = {
   fontSize: THEME_FONTS_SIZE,
   linearGradient: THEME_LINEAR_GRADIENT,
   fontWeight: THEME_FONT_WEIGHT,
+  specialSpaces: THEME_SPACIAL_SPACES,
 };
 
 export const lightTheme = {
-	...BasicTheme,
+  ...BasicTheme,
   themeName: 'lightTheme',
   colors: {
     ...BasicTheme.colors,
     primary: '#FFF',
     secondary: '#000000',
+    gray5: '#3d3d3d',
   },
 };
 
 export const darkTheme = {
-	...BasicTheme,
+  ...BasicTheme,
   themeName: 'darkTheme',
   colors: {
     ...BasicTheme.colors,

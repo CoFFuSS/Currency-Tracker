@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Container, Content, InnerText, TitleText } from './styled';
+import { Container, Content, InnerText, StyledArrow, TitleText } from './styled';
 
 interface ExpandableFieldProps {
   title: string;
-  content: string;
+  content: JSX.Element;
 }
 
 export const ExpandableField = ({ title, content }: ExpandableFieldProps): JSX.Element => {
@@ -16,6 +16,7 @@ export const ExpandableField = ({ title, content }: ExpandableFieldProps): JSX.E
     <div>
       <Container onClick={handleToggle}>
         <TitleText>{title}</TitleText>
+        <StyledArrow />
       </Container>
       <Content isOpen={isOpen}>
         <InnerText>{content}</InnerText>
