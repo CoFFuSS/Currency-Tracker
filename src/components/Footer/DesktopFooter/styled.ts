@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -12,23 +12,30 @@ export const Copyright = styled.div`
 `;
 
 export const CopyrightText = styled.p`
-  size: ${({ theme }) => theme.fontSize.sm};
-  color: ${({ theme }) => theme.colors.gray5};
+  ${({ theme }) => css`
+    ${theme.typography.variant.p2};
+    color: ${theme.colors.gray5};
+    ${theme.media.xl`
+		${theme.typography.variant.h6}
+		`}
+  `}
 `;
 
 export const Content = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  margin-right: 120px;
-  margin-left: 120px;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: ${theme.spacing(0, 120)};
+  `}
 `;
 
 export const LinksContainer = styled.div`
-  color: ${({ theme }) => theme.colors.secondary};
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    color: ${theme.colors.secondary};
+  `}
 `;
 
 export const LinksContent = styled.div`

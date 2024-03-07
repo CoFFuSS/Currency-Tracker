@@ -1,3 +1,5 @@
+import { pxToRem } from './utils';
+
 export const THEME_COLORS = {
   primary: '#000000',
   secondary: '#000000',
@@ -11,55 +13,14 @@ export const THEME_COLORS = {
   white: '#FFFFFF',
 };
 
-export const THEME_BREAKPOINTS = {
-  xs: '0px',
-  sm: '576px',
-  lg: '992px',
-  xl: '1200px',
-	xl_compare: '1200',
-  mw: '1546px',
-};
-
 export const THEME_BOX_SHADOWS = {
   header: '0px 0px 3px #000000',
   subheader: '0px 3px 3px #00000080',
 };
 
-export const THEME_SPACES = {
-  xss: '2px',
-  xs: '4px',
-  s: '8px',
-  mss: '12px',
-  ms: '16px',
-	mm: '20px',
-  m: '24px',
-  xm: '30px',
-  xmm: '40px',
-  xl: '48px',
-  xls: '54px',
-  l: '72px',
-  x: '100px',
-  xx: '200px',
-  xxl: '150px',
-  em: '300px',
-  e: '400px',
-  h: '1100px',
-};
-
 export const THEME_FONT_FAMILIES = {
-  primary: 'Poppins',
-  subHeader: 'Poppins, system-ui',
-};
-
-export const THEME_FONTS_SIZE = {
-  xs: '12px',
-  ss: '16px',
-  s: '20px',
-	sm: '24px',
-  mss: '26px',
-  ms: '32px',
-  m: '36px',
-  xl: '76px',
+  primary: 'Poppins, sans-serif',
+  secondary: 'Poppins, system-ui',
 };
 
 export const THEME_LINEAR_GRADIENT = {
@@ -75,8 +36,83 @@ export const THEME_FONT_WEIGHT = {
   bold: '700',
 };
 
-export const THEME_SPACIAL_SPACES = {
-  ms: '13px',
-  m: '15px',
-  ml: '22px',
+export const THEME_TYPOGRAPHY_VARIANTS = {
+  h1: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(76),
+    fontWeight: 600,
+    lineHeight: 114 / 76,
+  },
+  h2: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(39),
+    fontWeight: 600,
+    lineHeight: 58 / 39,
+  },
+  h3: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(35),
+    fontWeight: 400,
+    lineHeight: 50 / 35,
+  },
+  h4: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(32),
+    fontWeight: 300,
+    lineHeight: 41 / 32,
+  },
+  h5: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(28),
+    fontWeight: 400,
+    lineHeight: 42 / 28,
+  },
+  h6: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(24),
+    fontWeight: 400,
+    lineHeight: 36 / 24,
+  },
+  h7: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(20),
+    fontWeight: 300,
+    lineHeight: 41 / 20,
+  },
+  h8: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(13),
+    fontWeight: 400,
+    lineHeight: 18 / 13,
+  },
+  h9: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(10),
+    fontWeight: 300,
+    lineHeight: 12 / 10,
+  },
+  h10: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(12),
+    fontWeight: 300,
+    lineHeight: 16 / 12,
+  },
+  p1: {
+    fontFamily: THEME_FONT_FAMILIES.secondary,
+    fontSize: pxToRem(25),
+    fontWeight: 300,
+    lineHeight: 46 / 25,
+  },
+  p2: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(16),
+    fontWeight: 400,
+    lineHeight: 24 / 16,
+  },
+  p3: {
+    fontFamily: THEME_FONT_FAMILIES.secondary,
+    fontSize: pxToRem(12),
+    fontWeight: 300,
+    lineHeight: 22 / 12,
+  },
 };

@@ -1,128 +1,134 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Logo from '@/assets/images/HeaderLogo.svg';
 
 export const HeaderContainer = styled.header`
-  cursor: default;
+  ${({ theme }) => css`
+    cursor: default;
 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
-  height: ${({ theme }) => theme.spaces.xx};
+    height: ${theme.spacing(200)};
 
-  background: ${({ theme }) => theme.colors.black};
-  background: linear-gradient(${({ theme }) => theme.linearGradient.header});
-
-  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    justify-content: flex-start;
-    height: ${({ theme }) => theme.spaces.e};
-  }
+    background: ${theme.colors.black};
+    background: linear-gradient(${theme.linearGradient.header});
+    ${theme.media.lg`
+		justify-content: flex-start;
+		height: ${theme.spacing(400)};
+		`}
+  `}
 `;
 
 export const MainText = styled.p`
-  margin: 0 auto;
+  ${({ theme }) => css`
+    ${theme.typography.variant.h2}
+    margin: 0 auto;
 
-  font-size: ${({ theme }) => theme.spaces.xmm};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  color: transparent;
-  text-align: center;
-  word-break: normal;
+    color: transparent;
+    text-align: center;
+    word-break: normal;
 
-  background-image: linear-gradient(${({ theme }) => theme.linearGradient.headerText});
-  background-clip: text;
-  filter: drop-shadow(${({ theme }) => theme.shadow.header});
-
-  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    margin-right: ${({ theme }) => theme.spaces.xl};
-    font-size: ${({ theme }) => theme.fontSize.xl};
-    text-align: right;
-  }
+    background-image: linear-gradient(${theme.linearGradient.headerText});
+    background-clip: text;
+    filter: drop-shadow(${theme.boxShadow.header});
+    ${theme.media.lg`
+			margin-right: ${theme.spacing(48)};
+      ${theme.typography.variant.h1}
+      text-align: right;
+		`}
+  `}
 `;
 
 export const SubText = styled.p`
-  margin: 0 auto;
-  margin-top: 0;
+  ${({ theme }) => css`
+    margin: 0 auto;
+    margin-top: 0;
 
-  font-family: ${({ theme }) => theme.fontFamilies.subHeader};
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  font-weight: ${({ theme }) => theme.fontWeight.light};
-  line-height: ${({ theme }) => theme.spaces.m};
-  color: ${({ theme }) => theme.colors.gray1};
-  text-align: center;
-  text-shadow: ${({ theme }) => theme.shadow.subheader};
-  word-break: normal;
-
-  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    font-size: ${({ theme }) => theme.fontSize.mss};
-    line-height: ${({ theme }) => theme.spaces.xl};
-  }
+    ${theme.typography.variant.p3}
+    color: ${theme.colors.gray1};
+    text-align: center;
+    text-shadow: ${theme.boxShadow.subheader};
+    word-break: normal;
+    ${theme.media.lg`
+			${theme.typography.variant.p1}
+		`}
+  `}
 `;
 
 export const LogoContainer = styled.div`
-  display: none;
-  width: ${({ theme }) => theme.spaces.mss};
-  height: ${({ theme }) => theme.spaces.mss};
+  ${({ theme }) => css`
+    display: none;
+    width: ${theme.spacing(12)};
+    height: ${theme.spacing(12)};
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    display: flex;
-    width: ${({ theme }) => theme.spaces.em};
-    height: ${({ theme }) => theme.spaces.em};
-  }
+    ${theme.media.lg`
+			display: flex;
+      width: ${theme.spacing(300)};
+      height: ${theme.spacing(300)};
+		`}
+  `}
 `;
 
 export const StyledHeaderLogo = styled(Logo)`
-  display: none;
-  width: ${({ theme }) => theme.spaces.mss};
-  height: ${({ theme }) => theme.spaces.mss};
+  ${({ theme }) => css`
+    display: none;
+    width: ${theme.spacing(12)};
+    height: ${theme.spacing(12)};
 
-  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    display: flex;
-    width: ${({ theme }) => theme.spaces.em};
-    height: ${({ theme }) => theme.spaces.em};
-  }
+    ${theme.media.lg`
+		display: flex;
+      width: ${theme.spacing(300)};
+      height: ${theme.spacing(300)};
+		`}
+  `}
 `;
 
 export const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    align-items: end;
-  }
+    ${theme.media.lg`
+		align-items: end;
+		`}
+  `}
 `;
 
 export const MainTextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
 
-  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    align-items: end;
-  }
+    ${theme.media.lg`
+		align-items: end;`}
+  `}
 `;
 
 export const SubTextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
 
-  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    align-items: end;
-  }
+    ${theme.media.lg`
+		align-items: end;`}
+  `}
 `;
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: ${({ theme }) => theme.spaces.xxl};
-
-  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
+export const Content = styled.div`
+  ${({ theme }) => css`
     display: flex;
     flex-direction: row;
-    height: ${({ theme }) => theme.spaces.em};
-    margin-left: ${({ theme }) => theme.spaces.l};
-  }
+    height: ${theme.spacing(150)};
+
+    ${theme.media.lg`
+			display: flex;
+      flex-direction: row;
+      height: ${theme.spacing(300)};
+      margin-left: ${theme.spacing(72)};
+		`}
+  `}
 `;

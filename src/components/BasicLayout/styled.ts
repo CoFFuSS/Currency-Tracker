@@ -1,11 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const PageWrapper = styled.div`
-  margin: 0 auto;
-  background-color: ${({ theme }) => theme.colors.primary};
+  ${({ theme }) => css`
+    margin: 0 auto;
+    background-color: ${theme.colors.primary};
+  `}
 `;
 
 export const PageContainer = styled.div`
-  max-width: ${({ theme }) => theme.breakpoints.xl}px;
-  margin: 0 auto;
+  ${({ theme }) => css`
+    max-width: ${theme.breakpoints.xl};
+    margin: 0 auto;
+  `}
 `;

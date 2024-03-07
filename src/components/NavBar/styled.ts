@@ -1,48 +1,44 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-
 import Logo from '@/assets/images/MainPageLogo.svg';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.nav`
-  position: sticky;
-  z-index: 2;
-  top: 0;
+  ${({ theme }) => css`
+    position: sticky;
+    z-index: 2;
+    top: 0;
 
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: space-between;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
 
-  height: ${({ theme }) => theme.spaces.xm};
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: ${({ theme }) => theme.spaces.xm};
-  padding-left: ${({ theme }) => theme.spaces.xm};
+    height: ${theme.spacing(32)};
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: ${theme.spacing(30)};
+    padding-left: ${theme.spacing(30)};
 
-  background-color: ${({ theme }) => theme.colors.primary};
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    height: ${({ theme }) => theme.spaces.xl};
-  }
+    background-color: ${({ theme }) => theme.colors.primary};
+    ${theme.media.lg`height: ${theme.spacing(100)}`}
+  `}
 `;
 
 export const ImageContainer = styled.div`
-  width: ${({ theme }) => theme.spaces.mss}px;
-  height: ${({ theme }) => theme.spaces.mss}px;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    width: ${({ theme }) => theme.spaces.xmm};
-    height: ${({ theme }) => theme.spaces.xmm};
-  }
+  ${({ theme }) => css`
+    width: ${theme.spacing(12)};
+    height: ${theme.spacing(12)};
+    ${theme.media.lg`
+		width: ${theme.spacing(40)};
+    height: ${theme.spacing(40)};`}
+  `};
 `;
-
 export const StyledLogo = styled(Logo)`
-  cursor: pointer;
-  width: ${({ theme }) => theme.spaces.mss};
-  height: ${({ theme }) => theme.spaces.mss};
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    width: ${({ theme }) => theme.spaces.xmm};
-    height: ${({ theme }) => theme.spaces.xmm};
-  }
+  ${({ theme }) => css`
+    cursor: pointer;
+    width: ${theme.spacing(12)};
+    height: ${theme.spacing(12)};
+    ${theme.media.lg`
+		width: ${theme.spacing(40)};
+    height: ${theme.spacing(40)};`}
+  `};
 `;

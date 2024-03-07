@@ -1,33 +1,31 @@
 import {
-  Container,
   TextContainer,
-  MainTextContainer,
-  SubTextContainer,
   SubText,
   LogoContainer,
   StyledHeaderLogo,
   HeaderContainer,
   MainText,
+  Content,
 } from './styled';
 
 export const Header = (): JSX.Element => (
   <HeaderContainer>
-    <Container>
+    <Content>
       <TextContainer>
-        <MainTextContainer>
+        <TextContainer>
           <MainText>Modsen Currency</MainText>
           <MainText>Tracker</MainText>
-        </MainTextContainer>
+        </TextContainer>
 
-        <SubTextContainer>
+        <TextContainer>
           <SubText>Quotes for the dollar and other</SubText>
           <SubText>international currencies.</SubText>
-        </SubTextContainer>
+        </TextContainer>
       </TextContainer>
 
       <LogoContainer>
         <StyledHeaderLogo />
       </LogoContainer>
-    </Container>
+    </Content>
   </HeaderContainer>
 );

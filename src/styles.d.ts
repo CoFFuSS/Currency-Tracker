@@ -5,8 +5,8 @@ declare module '*.module.css' {
   const classNames: ClassNames;
   export = classNames;
 }
-import { ITheme } from '@/types/theme_interface';
+import { Theme } from '@/types/theme';
 import 'styled-components';
 declare module 'styled-components' {
-  export interface DefaultTheme extends ITheme {}
+  export interface DefaultTheme extends Theme {}
 }

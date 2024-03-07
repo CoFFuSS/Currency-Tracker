@@ -1,46 +1,46 @@
-import { ITheme } from '@/types/theme_interface';
+import { THEME_BREAKPOINTS, media } from './breakpoints';
 import {
   THEME_BOX_SHADOWS,
-  THEME_BREAKPOINTS,
   THEME_COLORS,
-  THEME_FONTS_SIZE,
   THEME_FONT_FAMILIES,
   THEME_FONT_WEIGHT,
   THEME_LINEAR_GRADIENT,
-  THEME_SPACES,
-  THEME_SPACIAL_SPACES,
+  THEME_TYPOGRAPHY_VARIANTS,
 } from './constants';
+import { pxToRem, spacing } from './utils';
 
-const BasicTheme: ITheme = {
-  themeName: 'basicTheme',
+export const basicTheme = {
   colors: THEME_COLORS,
   breakpoints: THEME_BREAKPOINTS,
-  shadow: THEME_BOX_SHADOWS,
-  spaces: THEME_SPACES,
-  fontFamilies: THEME_FONT_FAMILIES,
-  fontSize: THEME_FONTS_SIZE,
+  boxShadow: THEME_BOX_SHADOWS,
+  typography: {
+    fontFamilies: THEME_FONT_FAMILIES,
+    variant: THEME_TYPOGRAPHY_VARIANTS,
+  },
   linearGradient: THEME_LINEAR_GRADIENT,
   fontWeight: THEME_FONT_WEIGHT,
-  specialSpaces: THEME_SPACIAL_SPACES,
+  spacing,
+  media,
+  utils: {
+    pxToRem,
+  },
 };
 
 export const lightTheme = {
-  ...BasicTheme,
-  themeName: 'lightTheme',
+  ...basicTheme,
   colors: {
-    ...BasicTheme.colors,
-    primary: '#FFF',
-    secondary: '#000000',
+    ...basicTheme.colors,
+    primary: THEME_COLORS.white,
+    secondary: THEME_COLORS.black,
     gray5: '#3d3d3d',
   },
 };
 
 export const darkTheme = {
-  ...BasicTheme,
-  themeName: 'darkTheme',
+  ...basicTheme,
   colors: {
-    ...BasicTheme.colors,
-    primary: '#000000',
-    secondary: '#FFF',
+    ...basicTheme.colors,
+    primary: THEME_COLORS.black,
+    secondary: THEME_COLORS.white,
   },
 };

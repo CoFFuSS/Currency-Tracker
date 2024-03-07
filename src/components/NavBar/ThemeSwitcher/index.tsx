@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import propTypes from 'prop-types';
 
-import { ToggleSwitch } from './styled';
+import { StyledLabel } from './styled';
 
 import themeSwitcher from '@/store';
 
@@ -15,15 +14,12 @@ export const ThemeSwitcher = (): JSX.Element => {
   };
 
   return (
-    <>
-      <ToggleSwitch
-        checked={isChecked}
-        onClick={handleToggle}
+    <StyledLabel checked={isChecked}>
+      <input
+        onChange={handleToggle}
+        id='checkbox'
+        type='checkbox'
       />
-    </>
+    </StyledLabel>
   );
-};
-
-ThemeSwitcher.propType = {
-  isChecked: propTypes.bool,
 };

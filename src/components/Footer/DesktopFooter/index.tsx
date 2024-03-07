@@ -8,7 +8,6 @@ import {
   LinksContainer,
   LinksContent,
 } from './styled';
-import { Fragment } from 'react';
 
 export const DesktopFooter = () => {
   return (
@@ -21,12 +20,10 @@ export const DesktopFooter = () => {
           <Title>{title}</Title>
         </InfoBlock>
         {routes_options.map(({ title, content }) => (
-          <Fragment key={title}>
-            <LinksContainer>
-              {title}
-              <LinksContent>{content}</LinksContent>
-            </LinksContainer>
-          </Fragment>
+          <LinksContainer key={title}>
+            {title}
+            <LinksContent>{content}</LinksContent>
+          </LinksContainer>
         ))}
       </Content>
       <Copyright>

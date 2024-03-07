@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Logo from '@/assets/images/MainPageLogo.svg';
 export const Container = styled.footer`
   justify-content: center;
@@ -11,42 +11,50 @@ export const Container = styled.footer`
 `;
 
 export const StyledLink = styled(Link)`
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  color: ${({ theme }) => theme.colors.gray5};
-  text-decoration: none;
+  ${({ theme }) => css`
+    ${theme.typography.variant.h10}
+    color: ${theme.colors.gray5};
+    text-decoration: none;
+  `}
 `;
 
 export const InfoBlock = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  height: ${({ theme }) => theme.spaces.xm};
-  margin-right: ${({ theme }) => theme.spaces.xmm};
-  margin-left: ${({ theme }) => theme.spaces.xmm};
+    height: ${theme.spacing(30)};
+    margin: ${theme.spacing(0, 40)};
+  `}
 `;
 
 export const LogoContainer = styled.div`
-  display: flex;
-  width: ${({ theme }) => theme.spaces.xm};
-  height: ${({ theme }) => theme.spaces.xm};
+  ${({ theme }) => css`
+    display: flex;
+    width: ${theme.spacing(30)};
+    height: ${theme.spacing(30)};
+  `}
 `;
 
 export const StyledLogo = styled(Logo)`
-  display: flex;
-  width: ${({ theme }) => theme.spaces.xm};
-  height: ${({ theme }) => theme.spaces.xm};
+  ${({ theme }) => css`
+    display: flex;
+    width: ${theme.spacing(30)};
+    height: ${theme.spacing(30)};
+  `}
 `;
 
 export const Title = styled.p`
-  margin: 0 16px;
+  ${({ theme }) => css`
+    margin: ${({ theme }) => theme.spacing(0, 16)};
 
-  font-size: ${({ theme }) => theme.spaces.mm};
-  font-weight: ${({ theme }) => theme.fontWeight.semibold};
-  color: transparent;
-  text-align: center;
-  word-break: normal;
+    ${theme.typography.variant.h7}
+    color: transparent;
+    text-align: center;
+    word-break: normal;
 
-  background-image: linear-gradient(${({ theme }) => theme.linearGradient.headerText});
-  background-clip: text;
+    background-image: linear-gradient(${theme.linearGradient.headerText});
+    background-clip: text;
+  `}
 `;

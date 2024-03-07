@@ -2,23 +2,24 @@ import { makeAutoObservable } from 'mobx';
 
 import { darkTheme, lightTheme } from '@/theme';
 
-import { DefaultTheme } from 'styled-components';
+import { Theme } from '@/types/theme';
 
-const THEME_STORAGE_KEY = 'theme';
-
+import { STORAGE_KEYS } from '@/constants/storageKeys';
 class ThemeSwitcher {
-  private _theme: DefaultTheme = darkTheme;
+  private _theme: Theme = darkTheme;
+  private _themeMode = 'dark';
 
   constructor() {
     makeAutoObservable(this);
     this.loadThemeFromStorage();
   }
   get themeName() {
-    return this._theme.themeName;
+    return this._themeMode;
   }
 
   toggleTheme() {
-    this._theme = this._theme.themeName === 'lightTheme' ? darkTheme : lightTheme;
+    this._theme = this._themeMode === 'light' ? darkTheme : lightTheme;
+		this._themeMode = this._themeMode === 'light' ? 'dark' : 'light';
     this.saveThemeToStorage();
   }
 
@@ -26,13 +27,13 @@ class ThemeSwitcher {
     return this._theme;
   }
   private saveThemeToStorage() {
-    localStorage.setItem(THEME_STORAGE_KEY, this._theme.themeName);
+    localStorage.setItem(STORAGE_KEYS.theme, this._themeMode);
   }
 
   private loadThemeFromStorage() {
-    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    const savedTheme = localStorage.getItem(STORAGE_KEYS.theme);
     if (savedTheme) {
-      this._theme = savedTheme === 'lightTheme' ? lightTheme : darkTheme;
+      this._theme = savedTheme === 'light' ? lightTheme : darkTheme;
     }
   }
 }

@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledLink = styled(Link)`
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  color: ${({ theme }) => theme.colors.secondary};
-  text-decoration: none;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    margin-right: auto;
-    font-size: ${({ theme }) => theme.fontSize.s};
-  }
+  ${({ theme }) => css`
+    ${theme.typography.variant.h9};
+    color: ${theme.colors.secondary};
+    text-decoration: none;
+    ${theme.media.lg`${theme.typography.variant.h7}`};
+  `}
 `;
+
+// margin-right: auto;
 
 export const LinkContainer = styled.div`
   display: flex;
