@@ -115,4 +115,10 @@ export const THEME_TYPOGRAPHY_VARIANTS = {
     fontWeight: 300,
     lineHeight: 22 / 12,
   },
+  p4: {
+    fontFamily: THEME_FONT_FAMILIES.primary,
+    fontSize: pxToRem(26),
+    fontWeight: 600,
+    lineHeight: 42 / 26,
+  },
 };

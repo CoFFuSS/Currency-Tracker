@@ -9,7 +9,7 @@ interface ExpandableFieldProps {
 export const ExpandableField = ({ title, content }: ExpandableFieldProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   return (
