@@ -24,7 +24,6 @@ export const Footer = () => {
             </LogoContainer>
             <Title>{title}</Title>
           </TitleBlock>
-
           <InfoText>{infoText}</InfoText>
         </InfoBlock>
         {routes_options.map(({ title, content }) => (

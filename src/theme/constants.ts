@@ -11,6 +11,7 @@ export const THEME_COLORS = {
   blue: '#A7B2C3',
   black: '#000000',
   white: '#FFFFFF',
+  mediumDark: '#474747',
 };
 
 export const THEME_BOX_SHADOWS = {
