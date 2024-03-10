@@ -1,6 +1,6 @@
 import { LinkContainer, StyledLink } from './styled';
 
-import { options } from '@/constants/links';
+import {options} from '@/constants'
 
 export const LinkElement = (): JSX.Element => {
   const { NAV_ROUTS } = options;

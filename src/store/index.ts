@@ -3,8 +3,8 @@ import { makeAutoObservable } from 'mobx';
 import { darkTheme, lightTheme } from '@/theme';
 
 import { Theme } from '@/types/theme';
+import { STORAGE_KEYS } from '@/constants';
 
-import { STORAGE_KEYS } from '@/constants/storageKeys';
 class ThemeSwitcher {
   private _theme: Theme = darkTheme;
   private _themeMode = 'dark';

@@ -1,3 +1,5 @@
+export const CACHE_LIFETIME = 60 * 60 * 1000;
+
 export const response = {
   meta: {
     last_updated_at: '2024-03-07T23:59:59Z',
@@ -40,4 +42,8 @@ export const response = {
       value: 1,
     },
   },
+};
+
+export const STORAGE_KEYS = {
+  theme: 'theme',
 };

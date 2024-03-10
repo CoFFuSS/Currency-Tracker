@@ -1,4 +1,4 @@
-import { response } from '@/constants/response';
+import { response } from '@/constants';
 
 export class Observer {
   private observers: ((data: any) => void)[] = [];

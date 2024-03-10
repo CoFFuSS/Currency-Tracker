@@ -11,59 +11,41 @@ import {
 
 import { options } from './mock';
 const { QUOTES_SECTION } = options;
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-
-interface CurrencyResponse {
-  meta: {
-    last_updated_at: string;
-  };
-  data: Record<string, { code: string; value: string }>;
-}
+import { useState } from 'react';
+import { useCurrencyModal } from '@/utils/useCurrencyModal';
+import { CurrencyModal } from '@/components/CurrencyModal';
+import { useCurrencyRequest } from '@/utils/useCurrencyRequest';
 
 export const HomePage = (): JSX.Element => {
-  const [currency, setCurrency] = useState<CurrencyResponse | undefined>();
-  const [loading, setLoading]: [boolean, (loading: boolean) => void] = useState<boolean>(true);
-  const [error, setError]: [string, (error: string) => void] = useState('');
+  const [baseCurrency, setBaseCurrency] = useState<string>('USD');
+  const { isShown, toggle } = useCurrencyModal();
+  const { currency, loading, error } = useCurrencyRequest();
 
-  useEffect(() => {
-    const item = localStorage.getItem('CurrencyCaches');
-    item !== null
-      ? (setCurrency(JSON.parse(item)), setLoading(false))
-      : axios
-          .get<CurrencyResponse>('/api/currencies', {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          })
-          .then((response) => {
-            console.log(response.data);
-            setCurrency(response.data as CurrencyResponse);
-            localStorage.setItem(
-              'CurrencyCaches',
-              JSON.stringify(response.data as CurrencyResponse),
-            );
+  const handleCardClick = (baseCurrency: string) => () => {
+    setBaseCurrency(baseCurrency);
+    toggle();
+  };
 
-            setLoading(false);
-          })
-          .catch((ex) => {
-            const error =
-              ex.response.status === 404
-                ? 'Resource Not found'
-                : 'An unexpected error has occurred';
-            setError(error);
-            setLoading(false);
-          });
-  }, []);
+  
+
   return (
     <Container>
       {loading ? (
         <h1>Loading</h1>
       ) : (
         <StyledSection>
+          <CurrencyModal
+            isShown={isShown}
+            hide={toggle}
+            currencyList={Object.keys(currency?.data || {})}
+            baseCurrency={baseCurrency}
+          />
           <SectionName>Stocks</SectionName>
           {Object.values(currency?.data || {}).map((coin) => (
-            <Card key={coin.code}>
+            <Card
+              key={coin.code}
+              onClick={handleCardClick(coin.code)}
+            >
               <CardInfo>
                 <CardCurrency>{coin.code}</CardCurrency>
                 <CardPrice>{coin.value}</CardPrice>
