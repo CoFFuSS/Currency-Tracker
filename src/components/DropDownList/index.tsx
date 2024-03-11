@@ -1,24 +1,30 @@
 import React from 'react';
+import { Container, StyledList, StyledOption } from './styled';
 
 interface DropDownListProps {
   currenciesList: string[];
   setSelectedCurrency: (currency: string) => void;
+  defaultValue: string;
 }
 
-export const DropDownList = ({ currenciesList, setSelectedCurrency }: DropDownListProps) => {
+export const DropDownList = ({
+  currenciesList,
+  setSelectedCurrency,
+  defaultValue = 'Selected Currency',
+}: DropDownListProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     let ID = event.target.value;
     setSelectedCurrency(currenciesList.find((currency) => currency === ID) || '');
-    console.log(ID);
   };
 
   return (
-    <div>
-      <select onChange={handleChange}>
+    <Container>
+      <StyledList onChange={handleChange}>
+        <StyledOption key={defaultValue}>{defaultValue}</StyledOption>
         {currenciesList.map((currency) => (
-          <option key={currency}>{currency}</option>
+          <StyledOption key={currency}>{currency}</StyledOption>
         ))}
-      </select>
-    </div>
+      </StyledList>
+    </Container>
   );
 };

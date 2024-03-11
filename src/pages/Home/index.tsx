@@ -2,6 +2,7 @@ import {
   Card,
   CardCurrency,
   CardInfo,
+  CardItem,
   CardPrice,
   Container,
   SectionName,
@@ -9,13 +10,13 @@ import {
   SvgIcon,
 } from './styled';
 
-import { options } from './mock';
-const { QUOTES_SECTION } = options;
 import { useState } from 'react';
-import { useCurrencyModal } from '@/utils/useCurrencyModal';
+import { useCurrencyModal } from '@/hooks/useCurrencyModal';
 import { CurrencyModal } from '@/components/CurrencyModal';
-import { useCurrencyRequest } from '@/utils/useCurrencyRequest';
+import { useCurrencyRequest } from '@/hooks/useCurrencyRequest';
 import { DropDownList } from '@/components/DropDownList';
+import { CurrencyIcons } from '@/constants';
+import { getCurrenciesName, getDefinedPrice } from '@/utils/mainPage';
 
 export const HomePage = (): JSX.Element => {
   const [selectedCurrency, setSelectedCurrency] = useState<string>('USD' as string);
@@ -23,25 +24,19 @@ export const HomePage = (): JSX.Element => {
   const { isShown, toggle } = useCurrencyModal();
   const { currency, loading, error } = useCurrencyRequest();
 
-  const handleCardClick = (baseCurrency: string) => () => {
-    setCardCurrency(baseCurrency);
+  const handleCardClick = (cardCurrency: string) => () => {
+    setCardCurrency(cardCurrency);
     toggle();
   };
-
-  const getSpecificCurrencyValue = (name: string) => {
-    const filteredCurrencies = Object.values(currency?.data || {}).filter(
-      (coin) => coin.code === name,
-    );
-    const specificCurrency = filteredCurrencies.find((coin) => coin.code === name);
-    return specificCurrency?.value || 0;
-  };
-
-  const getDefinedPrice = (value: string = 'USD') => {
-    return (+value / +getSpecificCurrencyValue(selectedCurrency)).toFixed(6);
-  };
-
   return (
     <Container>
+      <DropDownList
+        currenciesList={getCurrenciesName(currency).filter(
+          (name) => name !== selectedCurrency,
+        )}
+        setSelectedCurrency={setSelectedCurrency}
+        defaultValue={selectedCurrency}
+      />
       {loading ? (
         <h1>Loading</h1>
       ) : (
@@ -50,8 +45,9 @@ export const HomePage = (): JSX.Element => {
             <CurrencyModal
               isShown={isShown}
               hide={toggle}
-              currencyList={currency?.data || {}}
-              baseCurrency={cardCurrency}
+              currencyList={currency}
+              cardCurrency={cardCurrency}
+              givenCurrency={selectedCurrency}
             />
             <SectionName>Stocks</SectionName>
             {Object.values(currency?.data || {}).map((coin) => (
@@ -59,29 +55,32 @@ export const HomePage = (): JSX.Element => {
                 key={coin.code}
                 onClick={handleCardClick(coin.code)}
               >
-                <CardInfo>
-                  <CardCurrency>{coin.code}</CardCurrency>
-                  <CardPrice>{getDefinedPrice(coin.value)}</CardPrice>
-                </CardInfo>
+                <CardItem>
+                  <SvgIcon>
+                    {CurrencyIcons.QUOTES_SECTION.filter((item) => item.currency === coin.code).map(
+                      ({ icon }) => icon,
+                    )}
+                  </SvgIcon>
+                  <CardInfo>
+                    <CardCurrency>{coin.code}</CardCurrency>
+                    <CardPrice>{getDefinedPrice(coin.value, selectedCurrency, currency)}</CardPrice>
+                  </CardInfo>
+                </CardItem>
               </Card>
             ))}
           </StyledSection>
-          <StyledSection>
+          {/* <StyledSection>
             <SectionName>Quotes</SectionName>
             {QUOTES_SECTION.map(({ icon, currency, price }) => (
               <Card key={currency}>
                 <SvgIcon>{icon}</SvgIcon>
-                <CardInfo>
+                <CardItem>
                   <CardCurrency>{currency}</CardCurrency>
                   <CardPrice>{price}</CardPrice>
-                </CardInfo>
+                </CardItem>
               </Card>
             ))}
-          </StyledSection>
-          <DropDownList
-            currenciesList={Object.keys(currency?.data || '')}
-            setSelectedCurrency={setSelectedCurrency}
-          />
+          </StyledSection> */}
         </>
       )}
       {error && <p>Error: {error}</p>}

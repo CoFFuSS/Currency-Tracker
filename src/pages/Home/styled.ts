@@ -66,15 +66,20 @@ export const SvgIcon = styled.div`
   `}
 `;
 
-export const CardInfo = styled.div`
+export const CardItem = styled.div`
   ${({ theme }) => css`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-content: space-between;
 
     width: ${theme.spacing(105)};
     height: ${theme.spacing(35)};
   `}
+`;
+
+export const CardInfo = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const CardCurrency = styled.p`
@@ -90,29 +95,5 @@ export const CardPrice = styled.p`
     margin: 0;
     ${theme.typography.variant.h10};
     color: ${theme.colors.blue};
-  `}
-`;
-
-export const ModalWrapper = styled.div`
-  visibility: visible;
-  opacity: 1;
-`;
-
-export const Modal = styled.div`
-  ${({ theme }) => css`
-    position: relative;
-    top: 50%;
-    left: 50%;
-
-    display: block;
-
-    width: ${theme.spacing(200)};
-    height: ${theme.spacing(100)};
-    margin: 50% 0 0 -300px;
-
-    opacity: 0;
-    background: #fff;
-
-    transition: all 0.5s ease-in-out;
   `}
 `;
