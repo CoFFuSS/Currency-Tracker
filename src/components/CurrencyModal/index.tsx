@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 interface CurrencyModalProps {
   isShown: boolean;
   hide: () => void;
-  currencyList: string[];
+  currencyList: Record<string, { code: string; value: string }>;
   baseCurrency: string;
 }
 
@@ -25,13 +25,17 @@ export const CurrencyModal = ({
             <CloseButton onClick={hide}>X</CloseButton>
           </Header>
           <Content>
-            {currencyList}, {baseCurrency}
+            {Object.values(currencyList).map(({ code, value }) => (
+              <h1 key={code}>
+                {code}, {value}
+              </h1>
+            ))}
+            , {baseCurrency}
           </Content>
         </StyledModal>
       </Wrapper>
     </Fragment>
   );
-  console.log(currencyList);
 
   return isShown ? createPortal(modal, document.body) : null;
 };
