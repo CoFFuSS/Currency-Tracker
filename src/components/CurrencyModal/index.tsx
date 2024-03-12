@@ -1,9 +1,9 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Backdrop, Wrapper, StyledModal, HeaderText, CloseButton, Content, Header } from './styled';
 import { createPortal } from 'react-dom';
 import { DropDownList } from '../DropDownList';
 import { CurrencyResponse } from '@/interfaces/common';
-import { getCurrenciesName, getDefinedPrice } from '@/utils/mainPage';
+import { getCurrenciesName, getCurrencyRelation } from '@/utils/mainPage';
 
 interface CurrencyModalProps {
   isShown: boolean;
@@ -20,14 +20,18 @@ export const CurrencyModal = ({
   cardCurrency,
   givenCurrency,
 }: CurrencyModalProps) => {
-  const [selectedCurrency, setSelectedCurrency] = useState<string>('' as string);
-  const [inputAmount, setInputAmount] = useState<string>('');
-  const [outputAmount, setOutputAmount] = useState<string>('');
+  const [selectedCurrency, setSelectedCurrency] = useState<string>(givenCurrency as string);
+  const [inputAmount, setInputAmount] = useState<number>(0);
+  const [outputAmount, setOutputAmount] = useState<number>();
+
+  useEffect(() => {
+    setOutputAmount(
+      () => +inputAmount * +getCurrencyRelation(cardCurrency, selectedCurrency, currencyList),
+    );
+  }, [inputAmount]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputAmount(e.target.value);
-    const price = getDefinedPrice(givenCurrency, cardCurrency, currencyList);
-    setOutputAmount(() => String(+inputAmount * +price));
+    setInputAmount(+e.target.value);
   };
 
   const modal = (
@@ -43,7 +47,7 @@ export const CurrencyModal = ({
             <DropDownList
               setSelectedCurrency={setSelectedCurrency}
               currenciesList={getCurrenciesName(currencyList).filter(
-                (name) => name !== selectedCurrency,
+                (name) => name !== givenCurrency,
               )}
               defaultValue={givenCurrency}
             />
@@ -73,6 +77,5 @@ export const CurrencyModal = ({
       </Wrapper>
     </Fragment>
   );
-
   return isShown ? createPortal(modal, document.body) : null;
 };

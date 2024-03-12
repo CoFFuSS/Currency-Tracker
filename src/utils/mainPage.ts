@@ -23,3 +23,14 @@ export const getDefinedPrice = (
 export const getCurrenciesName = (currency: CurrencyResponse | undefined) => {
   return Object.keys(currency?.data || {});
 };
+
+export const getCurrencyRelation = (
+  fromValue: string,
+  toValue: string,
+  currency: CurrencyResponse | undefined,
+) => {
+  return (
+    +getSpecificCurrencyValue(fromValue, currency) / +getSpecificCurrencyValue(toValue, currency)
+  ).toFixed(9);
+};
+
