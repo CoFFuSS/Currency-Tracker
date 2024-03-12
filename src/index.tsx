@@ -10,10 +10,11 @@ async function enableMocking() {
 
     return worker.start();
   }
+
+  return null;
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-
 
 enableMocking().then(() => {
   root.render(

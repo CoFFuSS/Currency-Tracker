@@ -23,5 +23,6 @@ export const media = Object.keys(THEME_BREAKPOINTS).reduce<Accumulator>((acc, la
       ${css(...args)};
     }
   `;
+
   return acc;
 }, {} as Accumulator);

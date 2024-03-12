@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { Container, Content, InnerText, StyledArrow, TitleText } from './styled';
 
 interface ExpandableFieldProps {
@@ -8,6 +9,7 @@ interface ExpandableFieldProps {
 
 export const ExpandableField = ({ title, content }: ExpandableFieldProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
+
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
   };

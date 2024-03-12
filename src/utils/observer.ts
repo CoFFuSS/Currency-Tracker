@@ -1,25 +1,28 @@
 import { response } from '@/constants';
 
 export class Observer {
-  private observers: ((data: any) => void)[] = [];
+  private observers: ((data: typeof response) => void)[] = [];
+
   private data!: typeof response;
+
   constructor() {
     this.observers = [];
   }
 
-  subscribe(fn: (data: any) => void) {
+  subscribe(fn: (data: typeof response) => void): void {
     this.observers.push(fn);
     fn(this.data);
   }
 
-  unsubscribe(fn: (data: any) => void) {
+  unsubscribe(fn: (data: typeof response) => void): void {
     this.observers = this.observers.filter((subscriber) => subscriber !== fn);
   }
 
-  setData(data: any) {
+  setData(data: typeof response) {
     this.data = data;
     this.observers.forEach((observer) => observer(this.data));
   }
+
   getData() {
     return this.data;
   }

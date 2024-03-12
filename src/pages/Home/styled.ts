@@ -1,8 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
-
-export const StyledH1 = styled.h1`
-  color: ${({ theme }) => theme.colors.secondary};
-`;
 
 export const Container = styled.div`
   ${({ theme }) => css`

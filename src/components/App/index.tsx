@@ -4,9 +4,10 @@ import { ThemeProvider } from 'styled-components';
 import { observer } from 'mobx-react-lite';
 
 import themeSwitcher from '@/store';
-import { ROUTES } from '@/constants';
 import { BasicLayout } from '@/components/BasicLayout';
-import { GlobalStyle } from '@/components/GlobalStyle';
+import ROUTES from '@/constants/navRoutes';
+
+import { GlobalStyle } from './styled';
 
 const App = observer(() => (
   <ThemeProvider theme={themeSwitcher.theme}>

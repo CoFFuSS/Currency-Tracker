@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
+
 import Icon from '@/assets/images/Down_Arrow.svg';
 
 export const Container = styled.div`
@@ -34,20 +36,19 @@ export const Content = styled.div<{ isOpen: boolean }>`
 
 export const InnerText = styled.div`
   ${({ theme }) => css`
-    ${theme.typography.variant.h10};
-    color: ${({ theme }) => theme.colors.gray5};
+    ${theme.typography.variant.h5};
+    color: ${theme.colors.gray5};
     ${theme.media.lg`
-		${theme.typography.variant.h6}
 		`}
   `}
 `;
 
 export const TitleText = styled.span`
   ${({ theme }) => css`
-    ${theme.typography.variant.p2}
-    color: ${({ theme }) => theme.colors.secondary};
+    color: ${theme.colors.secondary};
+    ${theme.typography.variant.h4}
     ${theme.media.lg`
-		${theme.typography.variant.h5}`}
+		`}
   `}
 `;
 

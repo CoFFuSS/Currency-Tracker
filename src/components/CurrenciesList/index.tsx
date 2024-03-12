@@ -1,20 +1,21 @@
-import React from 'react';
+import { ChangeEvent } from 'react';
+
 import { Container, StyledList, StyledOption } from './styled';
 
-interface DropDownListProps {
+interface CurrenciesListProps {
   currenciesList: string[];
   setSelectedCurrency: (currency: string) => void;
   defaultValue: string;
 }
 
-export const DropDownList = ({
+export const CurrenciesList = ({
   currenciesList,
   setSelectedCurrency,
   defaultValue = 'Selected Currency',
-}: DropDownListProps) => {
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    let ID = event.target.value;
-    setSelectedCurrency(currenciesList.find((currency) => currency === ID) || '');
+}: CurrenciesListProps) => {
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const inputValue = event.target.value;
+    setSelectedCurrency(currenciesList.find((currency) => currency === inputValue) ?? '');
   };
 
   return (

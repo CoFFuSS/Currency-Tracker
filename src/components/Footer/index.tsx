@@ -1,3 +1,5 @@
+import { routesOptions } from '@/constants/footerRoutes';
+
 import {
   Container,
   Content,
@@ -10,33 +12,35 @@ import {
   Title,
   TitleBlock,
 } from './styled';
-import { copyright, infoText, routes_options, title } from './mock';
+
 import { ExpandableField } from '../ExpandableField';
 
-export const Footer = () => {
-  return (
-    <Container>
-      <Content>
-        <InfoBlock>
-          <TitleBlock>
-            <LogoContainer>
-              <StyledLogo />
-            </LogoContainer>
-            <Title>{title}</Title>
-          </TitleBlock>
-          <InfoText>{infoText}</InfoText>
-        </InfoBlock>
-        {routes_options.map(({ title, content }) => (
-          <ExpandableField
-            key={title}
-            title={title}
-            content={content}
-          />
-        ))}
-      </Content>
-      <Copyright>
-        <CopyrightText>{copyright}</CopyrightText>
-      </Copyright>
-    </Container>
-  );
-};
+export const Footer = () => (
+  <Container>
+    <Content>
+      <InfoBlock>
+        <TitleBlock>
+          <LogoContainer>
+            <StyledLogo />
+          </LogoContainer>
+          <Title>Modsen Currency Tracker</Title>
+        </TitleBlock>
+        <InfoText>
+          Since then, the company has grown organically to. Starsup is the world`s largest trading
+          platform, with $12 billion worth of currency trading and 500,000 tickets sold daily to
+          tens of thousands of traders worldwide.
+        </InfoText>
+      </InfoBlock>
+      {routesOptions.map(({ title, content }) => (
+        <ExpandableField
+          key={title}
+          title={title}
+          content={content}
+        />
+      ))}
+    </Content>
+    <Copyright>
+      <CopyrightText>Startsup © 2023-2024, All Rights Reserved</CopyrightText>
+    </Copyright>
+  </Container>
+);

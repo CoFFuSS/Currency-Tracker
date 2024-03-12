@@ -1,23 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+
 import Logo from '@/assets/images/MainPageLogo.svg';
 
 export const Container = styled.footer`
-  justify-content: center;
-
-  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.xl}) {
-    display: flex;
-    flex-direction: column;
-  }
+  ${({ theme }) => css`
+    justify-content: center;
+    ${theme.media.lg`
+			display: flex;
+      flex-direction: column;
+		`}
+  `}
 `;
 
 export const Content = styled.div`
   ${({ theme }) => css`
     ${theme.media.lg`
-		display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: ${theme.spacing(0, 120)};
+			display: flex;
+    	flex-direction: row;
+    	justify-content: space-between;
+    	margin: ${theme.spacing(0, 120)};
 	`}
   `}
 `;
@@ -31,10 +34,10 @@ export const InfoBlock = styled.div`
     margin: ${theme.spacing(0, 40)};
     margin-bottom: ${theme.spacing(34)};
     ${theme.media.lg`
-		flex-direction: column;
-		height: ${theme.spacing(300)};
-		width: ${theme.spacing(500)};
-		margin: 0 auto;
+			flex-direction: column;
+			height: ${theme.spacing(300)};
+			width: ${theme.spacing(500)};
+			margin: 0 auto;
 		`}
   `}
 `;
@@ -46,10 +49,10 @@ export const TitleBlock = styled.div`
     justify-content: center;
     margin: ${theme.spacing(0)} auto;
     ${theme.media.lg`
-		display: flex;
-		justify-content: flex-start;
-		margin: 0;
-		width: inherit;
+			display: flex;
+			justify-content: flex-start;
+			margin: 0;
+			width: inherit;
 		`}
   `}
 `;
@@ -72,9 +75,9 @@ export const StyledLogo = styled(Logo)`
 
 export const Title = styled.p`
   ${({ theme }) => css`
-    margin: ${({ theme }) => theme.spacing(0, 16)};
+    margin: ${theme.spacing(0, 16)};
 
-    ${theme.typography.variant.h7}
+    ${theme.typography.variant.p2}
     color: transparent;
     text-align: center;
     word-break: normal;
@@ -82,7 +85,6 @@ export const Title = styled.p`
     background-image: linear-gradient(${theme.linearGradient.headerText});
     background-clip: text;
     ${theme.media.lg`
-		${theme.typography.variant.p4}
 		`}
   `}
 `;
@@ -90,10 +92,10 @@ export const Title = styled.p`
 export const InfoText = styled.p`
   ${({ theme }) => css`
     display: none;
+    ${theme.typography.variant.h5}
     ${theme.media.lg`
-		display: flex;
-		${theme.typography.variant.h6}
-		color: ${theme.colors.secondary}
+			display: flex;
+			color: ${theme.colors.secondary}
 		`}
   `}
 `;
@@ -111,19 +113,18 @@ export const CopyrightText = styled.p`
   ${({ theme }) => css`
     ${theme.typography.variant.p2};
     color: ${theme.colors.gray5};
-    ${theme.media.xl`
-		${theme.typography.variant.h6}
+    ${theme.typography.variant.h5}
+    ${theme.media.lg`
 		`}
   `}
 `;
 
 export const StyledLink = styled(Link)`
   ${({ theme }) => css`
-    ${theme.typography.variant.h10}
     color: ${theme.colors.gray5};
     text-decoration: none;
+    ${theme.typography.variant.h5}
     ${theme.media.lg`
-		${theme.typography.variant.h6}
 		`}
   `}
 `;

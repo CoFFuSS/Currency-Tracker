@@ -1,3 +1,5 @@
+/* eslint-disable react/state-in-constructor */
+/* eslint-disable react/destructuring-assignment */
 import { Component, ErrorInfo, ReactNode } from 'react';
 
 interface Props {

@@ -3,7 +3,7 @@ import { ContatoPage } from '@/pages/Contato';
 import { HomePage } from '@/pages/Home';
 import { TimelinePage } from '@/pages/Timeline';
 
-export const ROUTES = [
+const ROUTES = [
   {
     path: '/',
     element: <HomePage />,
@@ -21,3 +21,5 @@ export const ROUTES = [
     element: <TimelinePage />,
   },
 ];
+
+export default ROUTES;

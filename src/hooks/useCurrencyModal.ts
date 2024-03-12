@@ -5,7 +5,11 @@ export const useCurrencyModal = () => {
   const toggle = () => setIsShown(!isShown);
 
   useEffect(() => {
-    isShown ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'unset');
+    if (isShown) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
   }, [isShown]);
 
   return {

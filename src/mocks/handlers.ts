@@ -1,7 +1,8 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { HttpResponse, http } from 'msw';
 
-const postsResolver = () => {
-  return HttpResponse.json({
+const postsResolver = () =>
+  HttpResponse.json({
     meta: {
       last_updated_at: '2024-03-07T23:59:59Z',
     },
@@ -44,7 +45,6 @@ const postsResolver = () => {
       },
     },
   });
-};
 
 // request resolver
 const postsHandler = http.get('/api/currencies', postsResolver);

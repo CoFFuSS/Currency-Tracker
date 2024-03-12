@@ -1,5 +1,5 @@
 export const options = {
-  NAV_ROUTS: [
+  NAV_ROUTES: [
     {
       to: '/',
       name: 'Home',

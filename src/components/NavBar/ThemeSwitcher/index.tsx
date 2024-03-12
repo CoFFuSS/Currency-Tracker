@@ -1,13 +1,12 @@
 import { useState } from 'react';
 
-import { StyledLabel } from './styled';
-
 import themeSwitcher from '@/store';
 
+import { StyledLabel } from './styled';
+
 export const ThemeSwitcher = (): JSX.Element => {
-  const [isChecked, setIsChecked] = useState(() =>
-    themeSwitcher.themeName === 'darkTheme' ? false : true,
-  );
+  const [isChecked, setIsChecked] = useState(() => themeSwitcher.themeName !== 'darkTheme');
+
   const handleToggle = () => {
     themeSwitcher.toggleTheme();
     setIsChecked((prev) => !prev);

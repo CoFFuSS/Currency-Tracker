@@ -1,10 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-/* @font-face {
-    font-family: Poppins, sans-serif;
-} */
-
 body{
     overflow-x: hidden;
     box-sizing:border-box;
@@ -13,9 +9,6 @@ body{
 
 }
 
-h1,h2,h3,h4,h5 {
-    margin: 0;
-}
 
 :root {
 	align-content: center;

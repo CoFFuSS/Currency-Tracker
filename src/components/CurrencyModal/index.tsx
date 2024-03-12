@@ -1,9 +1,12 @@
-import { Fragment, useEffect, useState } from 'react';
-import { Backdrop, Wrapper, StyledModal, HeaderText, CloseButton, Content, Header } from './styled';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { DropDownList } from '../DropDownList';
+
 import { CurrencyResponse } from '@/interfaces/common';
 import { getCurrenciesName, getCurrencyRelation } from '@/utils/mainPage';
+
+import { Backdrop, Wrapper, StyledModal, HeaderText, CloseButton, Content, Header } from './styled';
+
+import { CurrenciesList } from '../CurrenciesList';
 
 interface CurrencyModalProps {
   isShown: boolean;
@@ -20,7 +23,7 @@ export const CurrencyModal = ({
   cardCurrency,
   givenCurrency,
 }: CurrencyModalProps) => {
-  const [selectedCurrency, setSelectedCurrency] = useState<string>(givenCurrency as string);
+  const [selectedCurrency, setSelectedCurrency] = useState<string>(givenCurrency);
   const [inputAmount, setInputAmount] = useState<number>(0);
   const [outputAmount, setOutputAmount] = useState<number>();
 
@@ -28,14 +31,14 @@ export const CurrencyModal = ({
     setOutputAmount(
       () => +inputAmount * +getCurrencyRelation(cardCurrency, selectedCurrency, currencyList),
     );
-  }, [inputAmount]);
+  }, [inputAmount, cardCurrency, selectedCurrency, currencyList]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputAmount(+e.target.value);
   };
 
   const modal = (
-    <Fragment>
+    <>
       <Backdrop />
       <Wrapper>
         <StyledModal>
@@ -44,15 +47,16 @@ export const CurrencyModal = ({
             <CloseButton onClick={hide}>X</CloseButton>
           </Header>
           <Content>
-            <DropDownList
+            <CurrenciesList
               setSelectedCurrency={setSelectedCurrency}
               currenciesList={getCurrenciesName(currencyList).filter(
                 (name) => name !== givenCurrency,
               )}
               defaultValue={givenCurrency}
             />
-            <label>
+            <label htmlFor='inputAmount'>
               <input
+                id='inputAmount'
                 placeholder='Amount'
                 value={inputAmount}
                 onChange={handleInputChange}
@@ -66,8 +70,9 @@ export const CurrencyModal = ({
                 {cardCurrency}
               </option>
             </select>
-            <label>
+            <label htmlFor='outputAmount'>
               <input
+                id='outputAmount'
                 value={outputAmount}
                 disabled
               />
@@ -75,7 +80,8 @@ export const CurrencyModal = ({
           </Content>
         </StyledModal>
       </Wrapper>
-    </Fragment>
+    </>
   );
+
   return isShown ? createPortal(modal, document.body) : null;
 };
