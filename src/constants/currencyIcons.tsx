@@ -13,39 +13,39 @@ export const CurrencyIcons = {
   QUOTES_SECTION: [
     {
       icon: <BitcoinSVG />,
-      currency: 'BTC',
+      name: 'BTC',
     },
     {
       icon: <AuDollarSVG />,
-      currency: 'AUD',
+      name: 'AUD',
     },
     {
       icon: <CaDollarSVG />,
-      currency: 'CAD',
+      name: 'CAD',
     },
     {
       icon: <DollarSVG />,
-      currency: 'USD',
+      name: 'USD',
     },
     {
       icon: <YenSVG />,
-      currency: 'JPY',
+      name: 'JPY',
     },
     {
       icon: <EuroSVG />,
-      currency: 'EUR',
+      name: 'EUR',
     },
     {
       icon: <WonSVG />,
-      currency: 'CNY',
+      name: 'CNY',
     },
     {
       icon: <LiraSVG />,
-      currency: 'TRY',
+      name: 'TRY',
     },
     {
       icon: <PesoSVG />,
-      currency: 'ARS',
+      name: 'ARS',
     },
   ],
 };

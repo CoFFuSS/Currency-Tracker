@@ -55,6 +55,7 @@ export const CurrencyModal = ({
               defaultValue={givenCurrency}
             />
             <label htmlFor='inputAmount'>
+              Input Amount
               <input
                 id='inputAmount'
                 placeholder='Amount'
@@ -63,14 +64,10 @@ export const CurrencyModal = ({
               />
             </label>
             <select>
-              <option
-                disabled
-                selected
-              >
-                {cardCurrency}
-              </option>
+              <option disabled>{cardCurrency}</option>
             </select>
             <label htmlFor='outputAmount'>
+              Output Amount
               <input
                 id='outputAmount'
                 value={outputAmount}

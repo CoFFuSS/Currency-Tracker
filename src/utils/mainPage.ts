@@ -16,10 +16,6 @@ export const getDefinedPrice = (
   value: string = 'USD',
 ) => (+value / +getSpecificCurrencyValue(selectedValue, currency)).toFixed(6);
 
-// const getCurrenciesName = (data: Record<string, { code: string; value: string }>) => {
-//   return Object.keys(data);
-// };
-
 export const getCurrenciesName = (currency: CurrencyResponse | undefined) =>
   Object.keys(currency?.data ?? {});
 

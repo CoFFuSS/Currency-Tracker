@@ -30,8 +30,6 @@ export const HomePage = () => {
     toggle();
   };
 
-  console.log(currency);
-
   return (
     <Container>
       <CurrenciesList
@@ -58,11 +56,12 @@ export const HomePage = () => {
                 onClick={handleCardClick(coin.code)}
               >
                 <CardItem>
-                  <SvgIcon>
-                    {CurrencyIcons.QUOTES_SECTION.filter((item) => item.currency === coin.code).map(
-                      ({ icon }) => icon,
-                    )}
-                  </SvgIcon>
+                  {CurrencyIcons.QUOTES_SECTION.filter((item) => item.name === coin.code).map(
+                    ({ icon, name }) => (
+                      <SvgIcon key={name}>{icon}</SvgIcon>
+                    ),
+                  )}
+
                   <CardInfo>
                     <CardCurrency>{coin.code}</CardCurrency>
                     <CardPrice>{getDefinedPrice(currency, selectedCurrency, coin.value)}</CardPrice>

@@ -2,15 +2,22 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
-  position: fixed;
-  z-index: 700;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  ${({ theme }) => css`
+    position: fixed;
+    z-index: 700;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-  width: inherit;
+    width: ${theme.spacing(260)};
 
-  outline: 0;
+    outline: 0;
+
+    ${theme.media.lg`
+    width: ${theme.spacing(600)};
+
+		`}
+  `}
 `;
 
 export const Backdrop = styled.div`
@@ -41,7 +48,10 @@ export const Header = styled.div`
   ${({ theme }) => css`
     display: flex;
     justify-content: space-between;
+
     padding: ${theme.spacing(8)};
+
+    background-color: ${theme.colors.gray5};
     border-radius: ${theme.spacing(8, 8, 0, 0)};
   `}
 `;
@@ -49,7 +59,7 @@ export const Header = styled.div`
 export const HeaderText = styled.div`
   ${({ theme }) => css`
     align-self: center;
-    color: ${theme.colors.primary};
+    color: ${theme.colors.secondary};
   `}
 `;
 
@@ -73,7 +83,13 @@ export const Content = styled.div`
   ${({ theme }) => css`
     overflow-x: hidden;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     max-height: 30rem;
     padding: ${theme.spacing(10)};
+
+    background-color: ${theme.colors.gray5};
   `}
 `;
