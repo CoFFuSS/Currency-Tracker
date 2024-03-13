@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
 
 import Logo from '@/assets/images/HeaderLogo.svg';
@@ -24,7 +25,7 @@ export const HeaderContainer = styled.header`
 
 export const MainText = styled.p`
   ${({ theme }) => css`
-    ${theme.typography.variant.h2}
+    ${theme.typography.variant.h1}
     margin: 0 auto;
 
     color: transparent;
@@ -36,7 +37,6 @@ export const MainText = styled.p`
     filter: drop-shadow(${theme.boxShadow.header});
     ${theme.media.lg`
 			margin-right: ${theme.spacing(48)};
-      ${theme.typography.variant.h1}
       text-align: right;
 		`}
   `}
@@ -47,13 +47,12 @@ export const SubText = styled.p`
     margin: 0 auto;
     margin-top: 0;
 
-    ${theme.typography.variant.p3}
+    ${theme.typography.variant.p1}
     color: ${theme.colors.gray1};
     text-align: center;
     text-shadow: ${theme.boxShadow.subheader};
     word-break: normal;
     ${theme.media.lg`
-			${theme.typography.variant.p1}
 		`}
   `}
 `;

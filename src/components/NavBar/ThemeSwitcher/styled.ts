@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
 
 export const ToggleSwitch = styled.div<{ checked: boolean }>`

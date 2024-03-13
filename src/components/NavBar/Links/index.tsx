@@ -1,21 +1,19 @@
-import { LinkContainer, StyledLink } from './styled';
-
 import { options } from '@/constants/links';
 
-export const LinkElement = (): JSX.Element => {
-  const { NAV_ROUTS } = options;
+import { LinkContainer, StyledLink } from './styled';
 
-  return (
-    <LinkContainer>
-      {NAV_ROUTS.map(({ name, to }) => (
-        <StyledLink
-          to={to}
-          key={name}
-          name-link={name}
-        >
-          {name}
-        </StyledLink>
-      ))}
-    </LinkContainer>
-  );
-};
+const { NAV_ROUTES } = options;
+
+export const LinkElement = (): JSX.Element => (
+  <LinkContainer>
+    {NAV_ROUTES.map(({ to, name }) => (
+      <StyledLink
+        to={to}
+        key={name}
+        name-link={name}
+      >
+        {name}
+      </StyledLink>
+    ))}
+  </LinkContainer>
+);

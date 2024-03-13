@@ -1,4 +1,7 @@
+import { DefaultTheme, FlattenInterpolation, ThemeProps, css } from 'styled-components';
+
 import { pxToRem } from './utils';
+import { media } from './breakpoints';
 
 export const THEME_COLORS = {
   primary: '#000000',
@@ -11,6 +14,7 @@ export const THEME_COLORS = {
   blue: '#A7B2C3',
   black: '#000000',
   white: '#FFFFFF',
+  mediumDark: '#474747',
 };
 
 export const THEME_BOX_SHADOWS = {
@@ -36,89 +40,109 @@ export const THEME_FONT_WEIGHT = {
   bold: '700',
 };
 
-export const THEME_TYPOGRAPHY_VARIANTS = {
-  h1: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(76),
-    fontWeight: 600,
-    lineHeight: 114 / 76,
-  },
-  h2: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(39),
-    fontWeight: 600,
-    lineHeight: 58 / 39,
-  },
-  h3: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(35),
-    fontWeight: 400,
-    lineHeight: 50 / 35,
-  },
-  h4: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(32),
-    fontWeight: 300,
-    lineHeight: 41 / 32,
-  },
-  h5: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(28),
-    fontWeight: 400,
-    lineHeight: 42 / 28,
-  },
-  h6: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(24),
-    fontWeight: 400,
-    lineHeight: 36 / 24,
-  },
-  h7: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(20),
-    fontWeight: 300,
-    lineHeight: 41 / 20,
-  },
-  h8: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(13),
-    fontWeight: 400,
-    lineHeight: 18 / 13,
-  },
-  h9: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(10),
-    fontWeight: 300,
-    lineHeight: 12 / 10,
-  },
-  h10: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(12),
-    fontWeight: 300,
-    lineHeight: 16 / 12,
-  },
-  p1: {
-    fontFamily: THEME_FONT_FAMILIES.secondary,
-    fontSize: pxToRem(25),
-    fontWeight: 300,
-    lineHeight: 46 / 25,
-  },
-  p2: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(16),
-    fontWeight: 400,
-    lineHeight: 24 / 16,
-  },
-  p3: {
-    fontFamily: THEME_FONT_FAMILIES.secondary,
-    fontSize: pxToRem(12),
-    fontWeight: 300,
-    lineHeight: 22 / 12,
-  },
-  p4: {
-    fontFamily: THEME_FONT_FAMILIES.primary,
-    fontSize: pxToRem(26),
-    fontWeight: 600,
-    lineHeight: 42 / 26,
-  },
+interface TypographyVariants {
+  [key: string]: FlattenInterpolation<ThemeProps<DefaultTheme>>;
+}
+
+export const THEME_TYPOGRAPHY_VARIANTS: TypographyVariants = {
+  h1: css`
+    font-family: ${THEME_FONT_FAMILIES.primary};
+    font-size: ${pxToRem(39)};
+    font-weight: 600;
+    line-height: ${58 / 39};
+
+    ${media.lg`
+			font-family: ${THEME_FONT_FAMILIES.primary};
+    	font-size: ${pxToRem(76)};
+    	font-weight: 600;
+    	line-height: ${114 / 76};
+		`}
+  `,
+
+  h2: css`
+    font-family: ${THEME_FONT_FAMILIES.primary};
+    font-size: ${pxToRem(13)};
+    font-weight: 400;
+    line-height: ${18 / 13};
+
+    ${media.lg`
+			font-family: ${THEME_FONT_FAMILIES.primary};
+    	font-size: ${pxToRem(35)};
+    	font-weight: 400;
+    	line-height: ${50 / 35};
+		`}
+  `,
+  h3: css`
+    font-family: ${THEME_FONT_FAMILIES.primary};
+    font-size: ${pxToRem(12)};
+    font-weight: 300;
+    line-height: ${16 / 12};
+    ${media.lg`
+			
+			font-family: ${THEME_FONT_FAMILIES.primary};
+    	font-size: ${pxToRem(32)};
+    	font-weight: 300;
+    	line-height: ${41 / 32};
+		`}
+  `,
+  h4: css`
+    font-family: ${THEME_FONT_FAMILIES.primary};
+    font-size: ${pxToRem(16)};
+    font-weight: 400;
+    line-height: ${24 / 16};
+    ${media.lg`
+			font-family: ${THEME_FONT_FAMILIES.primary};
+    	font-size: ${pxToRem(28)};
+    	font-weight: 400;
+    	line-height: ${42 / 28};
+		`}
+  `,
+  h5: css`
+    font-family: ${THEME_FONT_FAMILIES.primary};
+    font-size: ${pxToRem(16)};
+    font-weight: 400;
+    line-height: ${24 / 16};
+
+    ${media.lg`
+			font-family: ${THEME_FONT_FAMILIES.primary};
+   		font-size: ${pxToRem(24)};
+   		font-weight: 400;
+   		line-height: ${36 / 24};
+		`}
+  `,
+  h6: css`
+    font-family: ${THEME_FONT_FAMILIES.primary};
+    font-size: ${pxToRem(10)};
+    font-weight: 300;
+    line-height: ${12 / 10};
+
+    ${media.lg`
+		font-family: ${THEME_FONT_FAMILIES.primary};
+    font-size: ${pxToRem(20)};
+    font-weight: 300;
+    line-height: ${41 / 20};
+		`}
+  `,
+  p1: css`
+    ${media.xs`
+			font-family: ${THEME_FONT_FAMILIES.primary},
+    	font-size: ${pxToRem(12)},
+    	font-weight: 300,
+    	line-height: ${22 / 12},
+		`}
+  `,
+  p2: css`
+    font-family: ${THEME_FONT_FAMILIES.primary};
+    font-size: ${pxToRem(20)};
+    font-weight: 600;
+    line-height: ${30 / 20};
+
+    ${media.lg`
+			font-family: ${THEME_FONT_FAMILIES.primary};
+   		font-size: ${pxToRem(26)};
+   		font-weight: 600;
+   		line-height: ${39 / 26};
+
+		`}
+  `,
 };

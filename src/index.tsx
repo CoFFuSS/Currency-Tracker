@@ -4,12 +4,24 @@ import { BrowserRouter } from 'react-router-dom';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import App from '@/components/App';
 
+async function enableMocking() {
+  if (process.env.NODE_ENV === 'development') {
+    const { worker } = await import('./mocks/browser');
+
+    return worker.start();
+  }
+
+  return null;
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-root.render(
-  <ErrorBoundary>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ErrorBoundary>,
-);
+enableMocking().then(() => {
+  root.render(
+    <ErrorBoundary>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ErrorBoundary>,
+  );
+});

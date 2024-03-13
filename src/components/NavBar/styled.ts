@@ -1,5 +1,8 @@
-import Logo from '@/assets/images/MainPageLogo.svg';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
+
+import Logo from '@/assets/images/MainPageLogo.svg';
 
 export const Container = styled.nav`
   ${({ theme }) => css`
@@ -18,20 +21,21 @@ export const Container = styled.nav`
     padding-right: ${theme.spacing(30)};
     padding-left: ${theme.spacing(30)};
 
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${theme.colors.primary};
     ${theme.media.lg`height: ${theme.spacing(100)}`}
   `}
 `;
 
-export const ImageContainer = styled.div`
+export const ImageContainer = styled(Link)`
   ${({ theme }) => css`
-    width: ${theme.spacing(12)};
+    width: ${theme.spacing(30)};
     height: ${theme.spacing(12)};
     ${theme.media.lg`
 		width: ${theme.spacing(40)};
     height: ${theme.spacing(40)};`}
   `};
 `;
+
 export const StyledLogo = styled(Logo)`
   ${({ theme }) => css`
     cursor: pointer;

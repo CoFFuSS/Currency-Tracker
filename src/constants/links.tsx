@@ -1,20 +1,20 @@
 export const options = {
-  NAV_ROUTS: [
+  NAV_ROUTES: [
     {
       to: '/',
       name: 'Home',
     },
     {
-      to: 'contact',
-      name: 'Contact',
+      to: 'timeline',
+      name: 'TimeLine',
     },
     {
       to: 'bankcard',
       name: 'BankCard',
     },
     {
-      to: 'timeline',
-      name: 'TimeLine',
+      to: 'contact',
+      name: 'Contact',
     },
   ],
 };
