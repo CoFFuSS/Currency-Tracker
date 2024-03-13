@@ -6,12 +6,14 @@ interface CurrenciesListProps {
   currenciesList: string[];
   setSelectedCurrency: (currency: string) => void;
   defaultValue: string;
+  disable: boolean;
 }
 
 export const CurrenciesList = ({
   currenciesList,
   setSelectedCurrency,
-  defaultValue = 'Selected Currency',
+  defaultValue,
+  disable = true,
 }: CurrenciesListProps) => {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const inputValue = event.target.value;
@@ -20,7 +22,10 @@ export const CurrenciesList = ({
 
   return (
     <Container>
-      <StyledList onChange={handleChange}>
+      <StyledList
+        onChange={handleChange}
+        disabled={disable}
+      >
         <StyledOption key={defaultValue}>{defaultValue}</StyledOption>
         {currenciesList.map((currency) => (
           <StyledOption key={currency}>{currency}</StyledOption>

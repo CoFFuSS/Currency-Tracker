@@ -9,6 +9,10 @@ export const Container = styled.div`
 
     margin: ${theme.spacing(32, 26, 0, 26)};
     padding-bottom: ${theme.spacing(150)};
+
+    ${theme.media.lg`
+			margin: ${theme.spacing(32, 120, 0, 120)};
+		`}
   `}
 `;
 
@@ -20,6 +24,24 @@ export const StyledSection = styled.section`
     justify-content: center;
 
     margin-bottom: ${theme.spacing(32)};
+  `}
+`;
+
+export const CardContainer = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    row-gap: ${theme.spacing(20)};
+    ${theme.media.md`
+			flex-direction: row;
+			row-gap: 0;
+			display: default;
+    	flex-wrap: wrap;
+    	gap: ${theme.spacing(20)};
+    	justify-content: space-between;
+
+    	margin-bottom: ${theme.spacing(32)};
+	`}
   `}
 `;
 
@@ -43,6 +65,13 @@ export const Card = styled.div`
 
     background-color: ${theme.colors.mediumDark};
     border-radius: ${theme.spacing(3)};
+
+    ${theme.media.md`
+			width: calc(50% - ${theme.spacing(120)});
+			max-width: ${theme.spacing(520)};
+    	flex-basis: calc(50% - ${theme.spacing(120)});
+    	flex-grow: 0;
+		`}
   `}
 `;
 

@@ -9,6 +9,7 @@ import { useCurrencyRequest } from '@/hooks/useCurrencyRequest';
 
 import {
   Card,
+  CardContainer,
   CardCurrency,
   CardInfo,
   CardItem,
@@ -36,6 +37,7 @@ export const HomePage = () => {
         currenciesList={getCurrenciesName(currency).filter((name) => name !== selectedCurrency)}
         setSelectedCurrency={setSelectedCurrency}
         defaultValue={selectedCurrency}
+        disable={false}
       />
       {loading ? (
         <h1>Loading</h1>
@@ -50,25 +52,29 @@ export const HomePage = () => {
               givenCurrency={selectedCurrency}
             />
             <SectionName>Stocks</SectionName>
-            {Object.values(currency?.data ?? {}).map((coin) => (
-              <Card
-                key={coin.code}
-                onClick={handleCardClick(coin.code)}
-              >
-                <CardItem>
-                  {CurrencyIcons.QUOTES_SECTION.filter((item) => item.name === coin.code).map(
-                    ({ icon, name }) => (
-                      <SvgIcon key={name}>{icon}</SvgIcon>
-                    ),
-                  )}
+            <CardContainer>
+              {Object.values(currency?.data ?? {}).map((coin) => (
+                <Card
+                  key={coin.code}
+                  onClick={handleCardClick(coin.code)}
+                >
+                  <CardItem>
+                    {CurrencyIcons.QUOTES_SECTION.filter((item) => item.name === coin.code).map(
+                      ({ icon, name }) => (
+                        <SvgIcon key={name}>{icon}</SvgIcon>
+                      ),
+                    )}
 
-                  <CardInfo>
-                    <CardCurrency>{coin.code}</CardCurrency>
-                    <CardPrice>{getDefinedPrice(currency, selectedCurrency, coin.value)}</CardPrice>
-                  </CardInfo>
-                </CardItem>
-              </Card>
-            ))}
+                    <CardInfo>
+                      <CardCurrency>{coin.code}</CardCurrency>
+                      <CardPrice>
+                        {getDefinedPrice(currency, selectedCurrency, coin.value)}
+                      </CardPrice>
+                    </CardInfo>
+                  </CardItem>
+                </Card>
+              ))}
+            </CardContainer>
           </StyledSection>
         </>
       )}

@@ -4,7 +4,17 @@ import { createPortal } from 'react-dom';
 import { CurrencyResponse } from '@/interfaces/common';
 import { getCurrenciesName, getCurrencyRelation } from '@/utils/mainPage';
 
-import { Backdrop, Wrapper, StyledModal, HeaderText, CloseButton, Content, Header } from './styled';
+import {
+  Backdrop,
+  Wrapper,
+  StyledModal,
+  HeaderText,
+  CloseButton,
+  Content,
+  Header,
+  InfoContainer,
+  InputContainer,
+} from './styled';
 
 import { CurrenciesList } from '../CurrenciesList';
 
@@ -37,43 +47,55 @@ export const CurrencyModal = ({
     setInputAmount(+e.target.value);
   };
 
+  const handleClose = () => {
+    setInputAmount(0);
+    hide();
+  };
+
   const modal = (
     <>
       <Backdrop />
       <Wrapper>
-        <StyledModal>
+        <StyledModal isShown={isShown}>
           <Header>
-            <HeaderText>Currency Exchange</HeaderText>
-            <CloseButton onClick={hide}>X</CloseButton>
+            <HeaderText>Exchange rate</HeaderText>
+            <CloseButton onClick={handleClose}>X</CloseButton>
           </Header>
           <Content>
-            <CurrenciesList
-              setSelectedCurrency={setSelectedCurrency}
-              currenciesList={getCurrenciesName(currencyList).filter(
-                (name) => name !== givenCurrency,
-              )}
-              defaultValue={givenCurrency}
-            />
-            <label htmlFor='inputAmount'>
-              Input Amount
-              <input
-                id='inputAmount'
-                placeholder='Amount'
-                value={inputAmount}
-                onChange={handleInputChange}
+            <InfoContainer>
+              <CurrenciesList
+                setSelectedCurrency={setSelectedCurrency}
+                currenciesList={getCurrenciesName(currencyList).filter(
+                  (name) => name !== givenCurrency,
+                )}
+                defaultValue={givenCurrency}
+                disable={false}
               />
-            </label>
-            <select>
-              <option disabled>{cardCurrency}</option>
-            </select>
-            <label htmlFor='outputAmount'>
-              Output Amount
-              <input
-                id='outputAmount'
-                value={outputAmount}
-                disabled
+
+              <InputContainer>
+                <input
+                  placeholder='Amount'
+                  value={inputAmount}
+                  onChange={handleInputChange}
+                />
+              </InputContainer>
+            </InfoContainer>
+            <InfoContainer>
+              <CurrenciesList
+                setSelectedCurrency={setSelectedCurrency}
+                currenciesList={getCurrenciesName(currencyList).filter(
+                  (name) => name !== givenCurrency,
+                )}
+                defaultValue={cardCurrency}
+                disable
               />
-            </label>
+              <InputContainer>
+                <input
+                  value={outputAmount}
+                  readOnly
+                />
+              </InputContainer>
+            </InfoContainer>
           </Content>
         </StyledModal>
       </Wrapper>

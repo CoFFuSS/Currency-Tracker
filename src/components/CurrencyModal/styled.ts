@@ -1,5 +1,6 @@
+import styled, { css, keyframes } from 'styled-components';
+
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -9,8 +10,9 @@ export const Wrapper = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
 
-    width: ${theme.spacing(260)};
+    width: ${theme.spacing(300)};
 
+    border-radius: ${theme.spacing(8)};
     outline: 0;
 
     ${theme.media.lg`
@@ -32,39 +34,75 @@ export const Backdrop = styled.div`
   background: rgb(0 0 0 / 30%);
 `;
 
-export const StyledModal = styled.div`
-  ${({ theme }) => css`
+const ModalOpenAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
+const ModalCloseAnimation = keyframes`
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+`;
+
+export const StyledModal = styled.div<{ isShown: boolean }>`
+  ${({ theme, isShown }) => css`
     position: relative;
     z-index: 100;
 
     margin: auto;
 
     background: white;
+    background-color: ${theme.colors.gray1};
+    border: ${theme.spacing(1)} solid ${theme.colors.primary};
     border-radius: ${theme.spacing(8)};
+
+    ${isShown
+      ? css`
+          animation: ${ModalOpenAnimation} 0.3s forwards;
+        `
+      : css`
+          animation: ${ModalCloseAnimation} 0.3s forwards;
+        `}
   `}
 `;
 
 export const Header = styled.div`
   ${({ theme }) => css`
     display: flex;
-    justify-content: space-between;
+    align-self: center;
+    justify-content: center;
 
     padding: ${theme.spacing(8)};
 
-    background-color: ${theme.colors.gray5};
     border-radius: ${theme.spacing(8, 8, 0, 0)};
   `}
 `;
 
-export const HeaderText = styled.div`
+export const HeaderText = styled.p`
   ${({ theme }) => css`
-    align-self: center;
-    color: ${theme.colors.secondary};
+    justify-content: center;
+    color: ${theme.colors.black};
   `}
 `;
 
 export const CloseButton = styled.button`
   ${({ theme }) => css`
+    position: absolute;
+    top: ${theme.spacing(10)};
+    right: ${theme.spacing(10)};
+
     margin-left: ${theme.spacing(9)};
 
     font-size: ${theme.spacing(12)};
@@ -86,10 +124,56 @@ export const Content = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
-    max-height: 30rem;
+    height: ${theme.spacing(150)};
     padding: ${theme.spacing(10)};
+    ${theme.media.lg`
+			height: ${theme.spacing(200)};
+		`}
+  `}
+`;
 
-    background-color: ${theme.colors.gray5};
+export const InfoContainer = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    height: ${theme.spacing(30)};
+    margin-bottom: ${theme.spacing(10)};
+
+    ${theme.media.lg`
+    	width: ${theme.spacing(400)};
+			align-items: center;		
+		`}
+  `}
+`;
+
+export const InputContainer = styled.div`
+  ${({ theme }) => css`
+    ${theme.typography.variant.h5}
+    flex-grow: 1;
+    margin-left: ${theme.spacing(2)};
+    color: ${theme.colors.secondary};
+    border-radius: ${theme.spacing(10)};
+
+    input {
+      width: calc(100% - ${theme.spacing(4)});
+      height: calc(100% - ${theme.spacing(4)});
+      padding: ${theme.spacing(1)};
+
+      font-size: ${theme.typography.variant.h5};
+      color: ${theme.colors.black};
+
+      background-color: ${theme.colors.gray1};
+      border: 1px solid ${theme.colors.black};
+      border-radius: ${theme.spacing(1)};
+
+      &:focus {
+        border-color: ${theme.colors.primary};
+        outline: none;
+      }
+    }
   `}
 `;

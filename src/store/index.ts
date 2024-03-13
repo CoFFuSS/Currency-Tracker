@@ -39,6 +39,7 @@ class ThemeSwitcher {
 
     if (savedTheme) {
       this._theme = savedTheme === 'light' ? lightTheme : darkTheme;
+      this._themeMode = savedTheme === 'light' ? 'light' : 'dark';
     }
   }
 }

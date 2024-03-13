@@ -5,7 +5,7 @@ import themeSwitcher from '@/store';
 import { StyledLabel } from './styled';
 
 export const ThemeSwitcher = (): JSX.Element => {
-  const [isChecked, setIsChecked] = useState(() => themeSwitcher.themeName !== 'darkTheme');
+  const [isChecked, setIsChecked] = useState(() => themeSwitcher.themeName !== 'dark');
 
   const handleToggle = () => {
     themeSwitcher.toggleTheme();
