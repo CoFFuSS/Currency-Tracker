@@ -26,7 +26,6 @@ class ThemeSwitcher {
   }
 
   get theme(): Theme {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this._theme;
   }
 
