@@ -92,6 +92,7 @@ export const Header = styled.div`
 
 export const HeaderText = styled.p`
   ${({ theme }) => css`
+    ${theme.typography.variant.h3}
     justify-content: center;
     color: ${theme.colors.black};
   `}

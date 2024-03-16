@@ -1,56 +1,147 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import { Chart as ChartJS } from 'chart.js/auto';
+import { Component, createRef } from 'react';
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+  CandlestickController,
+  CandlestickElement,
+  OhlcController,
+  OhlcElement,
+} from 'chartjs-chart-financial';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(OhlcElement, OhlcController, CandlestickElement, CandlestickController);
+interface CandlestickData {
+  x: number;
+  o: number;
+  h: number;
+  l: number;
+  c: number;
+}
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart',
-    },
-  },
+interface Dataset {
+  data: CandlestickData[];
+  label: string;
+  backgroundColor: string;
+  borderColor: string;
+  borderWidth: number;
+  pointRadius: number;
+  pointHoverRadius: number;
+}
+
+interface CandlestickChartData {
+  labels: Date[];
+  datasets: Dataset[];
+}
+
+interface Options {
+  responsive: boolean;
   scales: {
-    y: { beginAtZero: false, suggestedMin: 300 },
-  },
-};
+    y: { beginAtZero: boolean; min: number; max: number };
+  };
+  plugins: {
+    title: {
+      display: boolean;
+      text: string;
+    };
+    legend: {
+      display: boolean;
+    };
+  };
+}
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+interface Props {}
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [400, 500, 600, 700, 200],
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: [700, 600, 800, 400, -100],
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
+interface State {
+  candlestickData: CandlestickChartData;
+  options: Options;
+}
 
-export function TimelinePage() {
-  return (
-    <Bar
-      options={options}
-      data={data}
-    />
-  );
+export class TimelinePage extends Component<Props, State> {
+  chartRef = createRef<HTMLCanvasElement>();
+
+  constructor(props: Props) {
+    super(props);
+
+    this.chartRef = createRef<HTMLCanvasElement>();
+
+    this.state = {
+      candlestickData: {
+        labels: [],
+        datasets: [
+          {
+            data: [{ x: Date.parse('2023-08-02'), o: 221.13, h: 222.99, l: 222.13, c: 222.31 }],
+            label: 'Candlestick Data',
+            backgroundColor: '#000000',
+            borderColor: 'blue',
+            borderWidth: 1,
+            pointRadius: 0,
+            pointHoverRadius: 0,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true, min: 0, max: 4000 },
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Candlestick Chart',
+          },
+          legend: {
+            display: false,
+          },
+        },
+      },
+    };
+  }
+
+  componentDidMount() {
+    const ctx = this.chartRef.current?.getContext('2d');
+    const { candlestickData, options } = this.state;
+
+    if (ctx) {
+      // eslint-disable-next-line no-new
+      new ChartJS(ctx, {
+        type: 'candlestick',
+        data: candlestickData,
+        options,
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    // const { candlestickData, options } = this.state;
+
+    if (this.chartRef.current) {
+      const chart = new ChartJS(this.chartRef.current, {
+        type: 'candlestick',
+
+        // The data for our dataset
+        data: {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+          datasets: [
+            {
+              label: 'My First dataset',
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: [0, 10, 5, 2, 20, 30, 45],
+            },
+          ],
+        },
+      });
+
+      chart.update();
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <div style={{ maxWidth: '600px', margin: '20px auto' }}>
+          <canvas ref={this.chartRef} />
+        </div>
+      </div>
+    );
+  }
 }

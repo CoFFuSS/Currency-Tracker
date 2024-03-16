@@ -39,7 +39,8 @@ export const CurrencyModal = ({
 
   useEffect(() => {
     setOutputAmount(
-      () => +inputAmount * +getCurrencyRelation(cardCurrency, selectedCurrency, currencyList),
+      Number(inputAmount) *
+        Number(getCurrencyRelation(cardCurrency, selectedCurrency, currencyList)),
     );
   }, [inputAmount, cardCurrency, selectedCurrency, currencyList]);
 
@@ -62,6 +63,7 @@ export const CurrencyModal = ({
             <CloseButton onClick={handleClose}>X</CloseButton>
           </Header>
           <Content>
+            <p>Conver corrency from</p>
             <InfoContainer>
               <CurrenciesList
                 setSelectedCurrency={setSelectedCurrency}
@@ -80,6 +82,8 @@ export const CurrencyModal = ({
                 />
               </InputContainer>
             </InfoContainer>
+            <p>To</p>
+
             <InfoContainer>
               <CurrenciesList
                 setSelectedCurrency={setSelectedCurrency}
