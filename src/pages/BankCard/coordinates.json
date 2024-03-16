@@ -1,0 +1,27 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "BTC",
+        "description": "Bank witch takes Bitcoin"
+      },
+      "geometry": {
+        "coordinates": [30.209193, 55.192371],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "EUR",
+        "description": "Bank witch takes Euro"
+      },
+      "geometry": {
+        "coordinates": [30.205484, 55.1907],
+        "type": "Point"
+      }
+    }
+  ],
+  "type": "FeatureCollection"
+}
