@@ -2,7 +2,7 @@
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import React, { PureComponent, RefObject } from 'react';
 
-import { MapContainer } from './styled';
+import { Container, MapContainer, SearchAdvise, SearchContainer, StyledInput } from './styled';
 import currenciesData from './coordinates.json';
 
 mapboxgl.accessToken =
@@ -29,9 +29,9 @@ interface BankCardPageState {
 }
 
 export class BankCardPage extends PureComponent<{}, BankCardPageState> {
-  mapContainer: RefObject<HTMLDivElement>;
+  private readonly mapContainer: RefObject<HTMLDivElement>;
 
-  map: mapboxgl.Map | null;
+  private map: mapboxgl.Map | null;
 
   constructor(props: {}) {
     super(props);
@@ -69,18 +69,18 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
     if (!this.map) return;
     const { searchQuery, currencies } = this.state;
 
-    // Удаляем существующие маркеры и слои перед добавлением новых
     if (this.map.getSource('points')) {
       this.map.removeLayer('points');
       this.map.removeSource('points');
     }
 
-    // Фильтруем валюты по запросу поиска
-    const filteredCurrencies = currencies.filter((currency) =>
-      currency.properties.title.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
+    const filteredCurrencies =
+      searchQuery.length === 0
+        ? []
+        : currencies.filter((currency) =>
+            currency.properties.title.toLowerCase().includes(searchQuery.toLowerCase()),
+          );
 
-    // Создаем и добавляем маркеры на карту для отфильтрованных валют
     this.map.addSource('points', {
       type: 'geojson',
       data: {
@@ -119,17 +119,18 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
     const { searchQuery } = this.state;
 
     return (
-      <div>
-        <div>
-          <input
+      <Container>
+        <SearchContainer>
+          <SearchAdvise>Search currency in the blank</SearchAdvise>
+          <StyledInput
             type='text'
-            placeholder='Search for currencies...'
+            placeholder='Currency search...'
             value={searchQuery}
             onChange={this.handleSearch}
           />
-        </div>
+        </SearchContainer>
         <MapContainer ref={this.mapContainer} />
-      </div>
+      </Container>
     );
   }
 }
