@@ -33,12 +33,20 @@ export const SearchAdvise = styled.p`
 
 export const StyledInput = styled.input`
   ${({ theme }) => css`
+    width: ${theme.spacing(400)};
+    height: ${theme.spacing(25)};
+
     ${theme.typography.variant.h6}
     background-color: ${theme.colors.gray5};
+    border: ${theme.spacing(20)} solid ${theme.colors.gray5};
     border-radius: ${theme.spacing(10)};
 
     &::placeholder {
-      color: ${theme.colors.secondary};
+      color: ${theme.colors.primary};
+    }
+
+    &:focus {
+      color: ${theme.colors.primary};
     }
   `}
 `;

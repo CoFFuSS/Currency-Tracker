@@ -2,6 +2,8 @@
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import React, { PureComponent, RefObject } from 'react';
 
+import marker from '@/assets/images/marker.png';
+
 import { Container, MapContainer, SearchAdvise, SearchContainer, StyledInput } from './styled';
 import currenciesData from './coordinates.json';
 
@@ -53,7 +55,8 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer.current!,
-      style: 'mapbox://styles/mapbox/streets-v12',
+      style: 'mapbox://styles/coffuss/cltui250u00kj01pjazkzdihd',
+      attributionControl: false,
       center: [lng, lat] as LngLatLike,
       zoom,
     });
@@ -74,12 +77,9 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
       this.map.removeSource('points');
     }
 
-    const filteredCurrencies =
-      searchQuery.length === 0
-        ? []
-        : currencies.filter((currency) =>
-            currency.properties.title.toLowerCase().includes(searchQuery.toLowerCase()),
-          );
+    const filteredCurrencies = currencies.filter((currency) =>
+      currency.properties.title.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
 
     this.map.addSource('points', {
       type: 'geojson',
@@ -98,7 +98,7 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
       type: 'symbol',
       source: 'points',
       layout: {
-        'icon-image': 'custom-marker',
+        'icon-image': marker,
         'text-field': ['get', 'title'],
         'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
         'text-offset': [0, 1.25],
