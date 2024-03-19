@@ -9,13 +9,15 @@ import {
 } from 'chartjs-chart-financial';
 
 import 'chartjs-adapter-moment';
-import { Props, State } from '@/types/timelinePage';
+import { CandlestickData, Props, State } from '@/types/timelinePage';
+import { Observer, currencyObservable } from '@/utils/observer';
 
 import { generateRandomCurrencyDataArray, getChartDataset, getChartOptions } from './utils';
+import { ChartContainer } from './styled';
 
 ChartJS.register(OhlcElement, OhlcController, CandlestickElement, CandlestickController);
 
-export class TimelinePage extends Component<Props, State> {
+export class TimelinePage extends Component<Props, State> implements Observer {
   private readonly chartRef = createRef<HTMLCanvasElement>();
 
   private chartInstance: ChartJS | null = null;
@@ -26,42 +28,63 @@ export class TimelinePage extends Component<Props, State> {
     this.chartRef = createRef<HTMLCanvasElement>();
 
     this.state = {
-      scales: {
-        y: { beginAtZero: false, min: 0, max: 1000 },
-      },
-      chartDataset: generateRandomCurrencyDataArray(),
-      candlestickData: { labels: [], datasets: [] },
+      chartDataset: [],
+      minPrice: 0,
+      maxPrice: 1000,
     };
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     const ctx = this.chartRef.current?.getContext('2d');
-    const { scales, chartDataset } = this.state;
+    const { chartDataset, minPrice, maxPrice } = this.state;
 
     if (ctx) {
       this.chartInstance = new ChartJS(ctx, {
         type: 'candlestick',
         data: getChartDataset(chartDataset),
-        options: getChartOptions(scales),
+        options: getChartOptions(minPrice, maxPrice),
       });
     }
+
+    currencyObservable.subscribe(this);
   }
 
-  handleChartUpdate = () => {
+  componentWillUnmount(): void {
+    currencyObservable.unsubscribe(this);
+  }
+
+  handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ minPrice: parseFloat(event.target.value) });
+  };
+
+  handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ maxPrice: parseFloat(event.target.value) });
+  };
+
+  handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { minPrice, maxPrice } = this.state;
+
+    const { scrollY } = window;
+
+    const newDataset = generateRandomCurrencyDataArray(minPrice, maxPrice);
+    this.setState({ chartDataset: newDataset });
+    currencyObservable.setData(newDataset, minPrice, maxPrice);
+
+    window.scrollTo(0, scrollY);
+  };
+
+  // eslint-disable-next-line react/no-unused-class-component-methods
+  update = (data: CandlestickData[], minPrice: number, maxPrice: number) => {
     const ctx = this.chartRef.current?.getContext('2d');
-    const { scales } = this.state;
 
     if (ctx && this.chartInstance) {
       this.chartInstance.destroy();
 
-      const newDataset = generateRandomCurrencyDataArray();
-      this.setState({ chartDataset: newDataset });
-      const { chartDataset } = this.state;
-
       this.chartInstance = new ChartJS(ctx, {
         type: 'candlestick',
-        data: getChartDataset(chartDataset),
-        options: getChartOptions(scales),
+        data: getChartDataset(data),
+        options: getChartOptions(minPrice, maxPrice),
       });
 
       this.chartInstance.update();
@@ -69,13 +92,39 @@ export class TimelinePage extends Component<Props, State> {
   };
 
   render() {
+    const { minPrice, maxPrice } = this.state;
+
     return (
-      <div>
-        <div style={{ maxWidth: '1200px', margin: '20px auto', maxHeight: '630px' }}>
-          <canvas ref={this.chartRef} />
+      <form onSubmit={this.handleFormSubmit}>
+        <div>
+          <label htmlFor='min-price'>
+            Minimum Price:
+            <input
+              id='min-price'
+              type='number'
+              value={minPrice}
+              onChange={this.handleMinPriceChange}
+            />
+          </label>
         </div>
-        <button onClick={this.handleChartUpdate}>Generate random currency rate</button>
-      </div>
+        <div>
+          <label htmlFor='max-price'>
+            Maximum Price:
+            <input
+              id='max-price'
+              type='number'
+              value={maxPrice}
+              onChange={this.handleMaxPriceChange}
+            />
+          </label>
+        </div>
+        <div>
+          <button type='submit'>Generate random currency rate</button>
+        </div>
+        <ChartContainer>
+          <canvas ref={this.chartRef} />
+        </ChartContainer>
+      </form>
     );
   }
 }

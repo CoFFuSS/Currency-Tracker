@@ -1,45 +1,42 @@
-import { response } from '@/constants';
+import { CandlestickData } from '@/types/timelinePage';
 
-export class Observer {
-  private observers: ((data: typeof response) => void)[] = [];
+export interface Observer {
+  update: (data: CandlestickData[], minPrice: number, maxPrice: number) => void;
+}
 
-  private data!: typeof response;
+class Observable {
+  private data: CandlestickData[] = [];
 
-  constructor() {
-    this.observers = [];
+  private minPrice: number = 0;
+
+  private maxPrice: number = 0;
+
+  private readonly observers: Observer[] = [];
+
+  public subscribe(observer: Observer) {
+    this.observers.push(observer);
   }
 
-  subscribe(fn: (data: typeof response) => void): void {
-    this.observers.push(fn);
-    fn(this.data);
+  public unsubscribe(observer: Observer) {
+    const index = this.observers.indexOf(observer);
+
+    if (index !== -1) {
+      this.observers.splice(index, 1);
+    }
   }
 
-  unsubscribe(fn: (data: typeof response) => void): void {
-    this.observers = this.observers.filter((subscriber) => subscriber !== fn);
+  public notifySubscribers() {
+    this.observers.forEach((observer) => {
+      observer.update(this.data, this.minPrice, this.maxPrice);
+    });
   }
 
-  setData(data: typeof response) {
+  public setData(data: CandlestickData[], minPrice: number, maxPrice: number) {
     this.data = data;
-    this.observers.forEach((observer) => observer(this.data));
-  }
-
-  getData() {
-    return this.data;
+    this.minPrice = minPrice;
+    this.maxPrice = maxPrice;
+    this.notifySubscribers();
   }
 }
 
-// class CurrencyObserver {
-//   private observable = new Observer();
-
-//   async fetchCurrencyData() {
-//     try {
-//       const response = await axios.get('/api/currencies');
-// 			const data = response.data;
-//       this.observable.setData({ currencies: data.currencies });
-//     } catch (error) {
-//       console.error('Ошибка при получении данных о валютах:', error);
-//     }
-//   }
-// }
-
-export const CurrencyObservable = new Observer();
+export const currencyObservable = new Observable();

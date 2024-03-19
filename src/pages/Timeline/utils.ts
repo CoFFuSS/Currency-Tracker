@@ -5,16 +5,16 @@ export const getRandomDataWithArguments = (min: number, max: number) =>
 
 const dayMilliseconds = 24 * 60 * 60 * 1000;
 
-export const generateRandomCurrencyDataArray = (): CandlestickData[] => {
+export const generateRandomCurrencyDataArray = (min: number, max: number): CandlestickData[] => {
   const startDate = new Date('2023-03-17').getTime();
   const currencyDataArray: CandlestickData[] = [];
 
   for (let i = 0; i < 30; i += 1) {
     const randomDayOffset = i * dayMilliseconds;
-    const o = Math.random() * 1000;
-    const c = Math.random() * 1000;
-    const h = getRandomDataWithArguments(Math.max(o, c), 1000);
-    const l = getRandomDataWithArguments(0, Math.min(c, o));
+    const o = getRandomDataWithArguments(min, max);
+    const c = getRandomDataWithArguments(min, max);
+    const h = getRandomDataWithArguments(Math.max(o, c), max);
+    const l = getRandomDataWithArguments(min, Math.min(c, o));
 
     const randomTimestamp = startDate + randomDayOffset;
 
@@ -48,11 +48,11 @@ export const getChartDataset = (dataset: CandlestickData[]) => ({
   ],
 });
 
-export const getChartOptions = (scales: {
-  y: { beginAtZero: boolean; min: number; max: number };
-}) => ({
+export const getChartOptions = (min: number, max: number) => ({
   responsive: true,
-  scales,
+  scales: {
+    y: { beginAtZero: false, min, max },
+  },
   plugins: {
     title: {
       display: true,
