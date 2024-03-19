@@ -8,55 +8,19 @@ import {
   OhlcElement,
 } from 'chartjs-chart-financial';
 
+import 'chartjs-adapter-moment';
+import { CandlestickData, Props, State } from '@/types/timelinePage';
+import { Observer, currencyObservable } from '@/utils/observer';
+
+import { generateRandomCurrencyDataArray, getChartDataset, getChartOptions } from './utils';
+import { ChartContainer } from './styled';
+
 ChartJS.register(OhlcElement, OhlcController, CandlestickElement, CandlestickController);
-interface CandlestickData {
-  x: number;
-  o: number;
-  h: number;
-  l: number;
-  c: number;
-}
 
-interface Dataset {
-  data: CandlestickData[];
-  label: string;
-  backgroundColor: string;
-  borderColor: string;
-  borderWidth: number;
-  pointRadius: number;
-  pointHoverRadius: number;
-}
+export class TimelinePage extends Component<Props, State> implements Observer {
+  private readonly chartRef = createRef<HTMLCanvasElement>();
 
-interface CandlestickChartData {
-  labels: Date[];
-  datasets: Dataset[];
-}
-
-interface Options {
-  responsive: boolean;
-  scales: {
-    y: { beginAtZero: boolean; min: number; max: number };
-  };
-  plugins: {
-    title: {
-      display: boolean;
-      text: string;
-    };
-    legend: {
-      display: boolean;
-    };
-  };
-}
-
-interface Props {}
-
-interface State {
-  candlestickData: CandlestickChartData;
-  options: Options;
-}
-
-export class TimelinePage extends Component<Props, State> {
-  chartRef = createRef<HTMLCanvasElement>();
+  private chartInstance: ChartJS | null = null;
 
   constructor(props: Props) {
     super(props);
@@ -64,84 +28,103 @@ export class TimelinePage extends Component<Props, State> {
     this.chartRef = createRef<HTMLCanvasElement>();
 
     this.state = {
-      candlestickData: {
-        labels: [],
-        datasets: [
-          {
-            data: [{ x: Date.parse('2023-08-02'), o: 221.13, h: 222.99, l: 222.13, c: 222.31 }],
-            label: 'Candlestick Data',
-            backgroundColor: '#000000',
-            borderColor: 'blue',
-            borderWidth: 1,
-            pointRadius: 0,
-            pointHoverRadius: 0,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: { beginAtZero: true, min: 0, max: 4000 },
-        },
-        plugins: {
-          title: {
-            display: true,
-            text: 'Candlestick Chart',
-          },
-          legend: {
-            display: false,
-          },
-        },
-      },
+      chartDataset: [],
+      minPrice: 0,
+      maxPrice: 1000,
     };
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     const ctx = this.chartRef.current?.getContext('2d');
-    const { candlestickData, options } = this.state;
+    const { chartDataset, minPrice, maxPrice } = this.state;
 
     if (ctx) {
-      // eslint-disable-next-line no-new
-      new ChartJS(ctx, {
+      this.chartInstance = new ChartJS(ctx, {
         type: 'candlestick',
-        data: candlestickData,
-        options,
+        data: getChartDataset(chartDataset),
+        options: getChartOptions(minPrice, maxPrice),
       });
     }
+
+    currencyObservable.subscribe(this);
   }
 
-  componentDidUpdate() {
-    // const { candlestickData, options } = this.state;
+  componentWillUnmount(): void {
+    currencyObservable.unsubscribe(this);
+  }
 
-    if (this.chartRef.current) {
-      const chart = new ChartJS(this.chartRef.current, {
+  handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ minPrice: parseFloat(event.target.value) });
+  };
+
+  handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ maxPrice: parseFloat(event.target.value) });
+  };
+
+  handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { minPrice, maxPrice } = this.state;
+
+    const { scrollY } = window;
+
+    const newDataset = generateRandomCurrencyDataArray(minPrice, maxPrice);
+    this.setState({ chartDataset: newDataset });
+    currencyObservable.setData(newDataset, minPrice, maxPrice);
+
+    window.scrollTo(0, scrollY);
+  };
+
+  // eslint-disable-next-line react/no-unused-class-component-methods
+  update = (data: CandlestickData[], minPrice: number, maxPrice: number) => {
+    const ctx = this.chartRef.current?.getContext('2d');
+
+    if (ctx && this.chartInstance) {
+      this.chartInstance.destroy();
+
+      this.chartInstance = new ChartJS(ctx, {
         type: 'candlestick',
-
-        // The data for our dataset
-        data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-          datasets: [
-            {
-              label: 'My First dataset',
-              backgroundColor: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
-              data: [0, 10, 5, 2, 20, 30, 45],
-            },
-          ],
-        },
+        data: getChartDataset(data),
+        options: getChartOptions(minPrice, maxPrice),
       });
 
-      chart.update();
+      this.chartInstance.update();
     }
-  }
+  };
 
   render() {
+    const { minPrice, maxPrice } = this.state;
+
     return (
-      <div>
-        <div style={{ maxWidth: '600px', margin: '20px auto' }}>
-          <canvas ref={this.chartRef} />
+      <form onSubmit={this.handleFormSubmit}>
+        <div>
+          <label htmlFor='min-price'>
+            Minimum Price:
+            <input
+              id='min-price'
+              type='number'
+              value={minPrice}
+              onChange={this.handleMinPriceChange}
+            />
+          </label>
         </div>
-      </div>
+        <div>
+          <label htmlFor='max-price'>
+            Maximum Price:
+            <input
+              id='max-price'
+              type='number'
+              value={maxPrice}
+              onChange={this.handleMaxPriceChange}
+            />
+          </label>
+        </div>
+        <div>
+          <button type='submit'>Generate random currency rate</button>
+        </div>
+        <ChartContainer>
+          <canvas ref={this.chartRef} />
+        </ChartContainer>
+      </form>
     );
   }
 }
