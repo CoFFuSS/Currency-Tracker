@@ -39,7 +39,10 @@ export interface CandlestickData {
   export   interface Props {}
   
   export   interface State {
-    options: Options;
+    scales: {
+        y: { beginAtZero: boolean; min: number; max: number };
+      };
+    chartDataset: CandlestickData[];
     candlestickData: CandlestickChartData;
   }
   

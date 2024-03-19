@@ -50,3 +50,23 @@ export const getChartDataset = (dataset: CandlestickData[]) => {
       }
       return chartDataset
 }
+
+export const getChartOptions = (scales: {
+    y: { beginAtZero: boolean; min: number; max: number };
+  }) => {
+    const chartOptions = {
+            responsive: true,
+            scales,
+            plugins: {
+              title: {
+                display: true,
+                text: 'Candlestick Chart',
+              },
+              legend: {
+                display: false,
+              },
+            },
+          }
+
+      return chartOptions
+}

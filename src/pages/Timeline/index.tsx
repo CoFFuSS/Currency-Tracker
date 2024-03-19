@@ -8,7 +8,7 @@ import {
   OhlcElement,
 } from 'chartjs-chart-financial';
 import 'chartjs-adapter-moment';
-import { generateRandomCurrencyDataArray, getChartDataset } from './utils';
+import { generateRandomCurrencyDataArray, getChartDataset, getChartOptions } from './utils';
 import { Props, State } from '@/types/timelinePage';
 
 ChartJS.register(OhlcElement, OhlcController, CandlestickElement, CandlestickController);
@@ -22,78 +22,47 @@ export class TimelinePage extends Component<Props, State> {
 
     this.chartRef = createRef<HTMLCanvasElement>();
     this.state = {
-      options: {
-        responsive: true,
-        scales: {
-          y: { beginAtZero: false, min: 0, max: 1000 },
-        },
-        plugins: {
-          title: {
-            display: true,
-            text: 'Candlestick Chart',
-          },
-          legend: {
-            display: false,
-          },
-        },
+      scales: {
+        y: {beginAtZero: false, min: 0, max: 1000}
       },
+      chartDataset: generateRandomCurrencyDataArray(),
       candlestickData: { labels: [], datasets: [] },
     };
   }
 
   componentDidMount() {
     const ctx = this.chartRef.current?.getContext('2d');
-    const { options } = this.state;
+    const {scales, chartDataset} = this.state
 
     if (ctx) {
-      // eslint-disable-next-line no-new
       this.chartInstance = new ChartJS(ctx, {
         type: 'candlestick',
-        data: getChartDataset(generateRandomCurrencyDataArray()),
-        options,
+        data: getChartDataset(chartDataset),
+        options: getChartOptions(scales),
       });
     }
   }
 
   handleChartUpdate = () => {
     const ctx = this.chartRef.current?.getContext('2d');
-    const {options} = this.state
+    const {scales} = this.state
   
     if (ctx && this.chartInstance) {
       this.chartInstance.destroy();
 
+      const newDataset = generateRandomCurrencyDataArray();
+      this.setState({chartDataset: newDataset})
+      const {chartDataset} = this.state
+
       this.chartInstance =  new ChartJS(ctx, {
         type: 'candlestick',
-        data: getChartDataset(generateRandomCurrencyDataArray()),
-        options
+        data: getChartDataset(chartDataset),
+        options: getChartOptions(scales)
       });
   
       this.chartInstance.update();
     }
   }
-
-  // componentDidUpdate() {
-  //   // const { candlestickData, options } = this.state;
-
-  //   if (this.chartRef.current) {
-  //     const chart = new ChartJS(this.chartRef.current, {
-  //       type: 'candlestick',
-
-  //       data: {
-  //         labels: [],
-  //         datasets: [
-  //           {
-  //             backgroundColor: 'rgb(255, 99, 132)',
-  //             borderColor: 'rgb(255, 99, 132)',
-  //             data: [0, 10, 5, 2, 20, 30, 45],
-  //           },
-  //         ],
-  //       },
-  //     });
-
-  //     chart.update();
-  //   }
-  // }
 
   render() {
     return (
