@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { Chart as ChartJS } from 'chart.js/auto';
-import { Component, createRef } from 'react';
+import { PureComponent, createRef } from 'react';
 import {
   CandlestickController,
   CandlestickElement,
@@ -15,11 +15,18 @@ import { CandlestickData, Props, State } from '@/types/timelinePage';
 import { Observer, currencyObservable } from '@/utils/observer';
 
 import { generateRandomCurrencyDataArray, getChartDataset, getChartOptions } from './utils';
-import { ChartContainer } from './styled';
+import {
+  ButtonContainer,
+  ChartContainer,
+  ControlBlock,
+  StyledInput,
+  StyledLabel,
+  SubmitButton,
+} from './styled';
 
 ChartJS.register(OhlcElement, OhlcController, CandlestickElement, CandlestickController);
 
-export class TimelinePage extends Component<Props, State> implements Observer {
+export class TimelinePage extends PureComponent<Props, State> implements Observer {
   private readonly chartRef = createRef<HTMLCanvasElement>();
 
   private chartInstance: ChartJS | null = null;
@@ -35,6 +42,8 @@ export class TimelinePage extends Component<Props, State> implements Observer {
       minPrice: 0,
 
       maxPrice: 1000,
+
+      selectedDate: new Date().toISOString().split('T')[0],
     };
   }
 
@@ -68,14 +77,18 @@ export class TimelinePage extends Component<Props, State> implements Observer {
     this.setState({ maxPrice: parseFloat(event.target.value) });
   };
 
+  handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ selectedDate: event.target.value });
+  };
+
   handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const { minPrice, maxPrice } = this.state;
+    const { minPrice, maxPrice, selectedDate } = this.state;
 
     const { scrollY } = window;
 
-    const newDataset = generateRandomCurrencyDataArray(minPrice, maxPrice);
+    const newDataset = generateRandomCurrencyDataArray(minPrice, maxPrice, selectedDate);
 
     this.setState({ chartDataset: newDataset });
 
@@ -85,7 +98,6 @@ export class TimelinePage extends Component<Props, State> implements Observer {
   };
 
   // eslint-disable-next-line react/no-unused-class-component-methods
-
   update = (data: CandlestickData[], minPrice: number, maxPrice: number) => {
     const ctx = this.chartRef.current?.getContext('2d');
 
@@ -105,37 +117,51 @@ export class TimelinePage extends Component<Props, State> implements Observer {
   };
 
   render() {
-    const { minPrice, maxPrice } = this.state;
+    const { minPrice, maxPrice, selectedDate } = this.state;
 
     return (
       <form onSubmit={this.handleFormSubmit}>
-        <div>
-          <label htmlFor='min-price'>
-            Minimum Price:
-            <input
-              id='min-price'
-              type='number'
-              value={minPrice}
-              onChange={this.handleMinPriceChange}
-            />
-          </label>
-        </div>
+        <ControlBlock>
+          <div>
+            <StyledLabel htmlFor='selected-date'>
+              Select Date:
+              <StyledInput
+                id='selected-date'
+                type='date'
+                value={selectedDate}
+                onChange={this.handleDateChange}
+              />
+            </StyledLabel>
+          </div>
 
-        <div>
-          <label htmlFor='max-price'>
-            Maximum Price:
-            <input
-              id='max-price'
-              type='number'
-              value={maxPrice}
-              onChange={this.handleMaxPriceChange}
-            />
-          </label>
-        </div>
+          <div>
+            <StyledLabel htmlFor='min-price'>
+              Minimum Price:
+              <StyledInput
+                id='min-price'
+                type='number'
+                value={minPrice}
+                onChange={this.handleMinPriceChange}
+              />
+            </StyledLabel>
+          </div>
 
-        <div>
-          <button type='submit'>Generate random currency rate</button>
-        </div>
+          <div>
+            <StyledLabel htmlFor='max-price'>
+              Maximum Price:
+              <StyledInput
+                id='max-price'
+                type='number'
+                value={maxPrice}
+                onChange={this.handleMaxPriceChange}
+              />
+            </StyledLabel>
+          </div>
+
+          <ButtonContainer>
+            <SubmitButton type='submit'>Submit</SubmitButton>
+          </ButtonContainer>
+        </ControlBlock>
 
         <ChartContainer>
           <canvas ref={this.chartRef} />

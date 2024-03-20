@@ -42,4 +42,5 @@ export interface State {
   chartDataset: CandlestickData[];
   minPrice: number;
   maxPrice: number;
+  selectedDate: string;
 }
