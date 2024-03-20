@@ -5,8 +5,12 @@ export const getRandomDataWithArguments = (min: number, max: number) =>
 
 const dayMilliseconds = 24 * 60 * 60 * 1000;
 
-export const generateRandomCurrencyDataArray = (min: number, max: number): CandlestickData[] => {
-  const startDate = new Date('2023-03-17').getTime();
+export const generateRandomCurrencyDataArray = (
+  min: number,
+  max: number,
+  selectedDate: string,
+): CandlestickData[] => {
+  const startDate = new Date(selectedDate).getTime();
   const currencyDataArray: CandlestickData[] = [];
 
   for (let i = 0; i < 30; i += 1) {
