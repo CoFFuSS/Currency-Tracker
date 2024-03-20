@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Component, createRef } from 'react';
 import {
@@ -9,6 +10,7 @@ import {
 } from 'chartjs-chart-financial';
 
 import 'chartjs-adapter-moment';
+
 import { CandlestickData, Props, State } from '@/types/timelinePage';
 import { Observer, currencyObservable } from '@/utils/observer';
 
@@ -29,19 +31,24 @@ export class TimelinePage extends Component<Props, State> implements Observer {
 
     this.state = {
       chartDataset: [],
+
       minPrice: 0,
+
       maxPrice: 1000,
     };
   }
 
   componentDidMount(): void {
     const ctx = this.chartRef.current?.getContext('2d');
+
     const { chartDataset, minPrice, maxPrice } = this.state;
 
     if (ctx) {
       this.chartInstance = new ChartJS(ctx, {
         type: 'candlestick',
+
         data: getChartDataset(chartDataset),
+
         options: getChartOptions(minPrice, maxPrice),
       });
     }
@@ -63,18 +70,22 @@ export class TimelinePage extends Component<Props, State> implements Observer {
 
   handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const { minPrice, maxPrice } = this.state;
 
     const { scrollY } = window;
 
     const newDataset = generateRandomCurrencyDataArray(minPrice, maxPrice);
+
     this.setState({ chartDataset: newDataset });
+
     currencyObservable.setData(newDataset, minPrice, maxPrice);
 
     window.scrollTo(0, scrollY);
   };
 
   // eslint-disable-next-line react/no-unused-class-component-methods
+
   update = (data: CandlestickData[], minPrice: number, maxPrice: number) => {
     const ctx = this.chartRef.current?.getContext('2d');
 
@@ -83,7 +94,9 @@ export class TimelinePage extends Component<Props, State> implements Observer {
 
       this.chartInstance = new ChartJS(ctx, {
         type: 'candlestick',
+
         data: getChartDataset(data),
+
         options: getChartOptions(minPrice, maxPrice),
       });
 
@@ -107,6 +120,7 @@ export class TimelinePage extends Component<Props, State> implements Observer {
             />
           </label>
         </div>
+
         <div>
           <label htmlFor='max-price'>
             Maximum Price:
@@ -118,9 +132,11 @@ export class TimelinePage extends Component<Props, State> implements Observer {
             />
           </label>
         </div>
+
         <div>
           <button type='submit'>Generate random currency rate</button>
         </div>
+
         <ChartContainer>
           <canvas ref={this.chartRef} />
         </ChartContainer>
