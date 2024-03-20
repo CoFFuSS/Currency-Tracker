@@ -2,8 +2,12 @@ import styled, { css } from 'styled-components';
 
 export const MapContainer = styled.div`
   ${({ theme }) => css`
-    height: ${theme.spacing(460)};
+    height: ${theme.spacing(230)};
     margin-bottom: ${theme.spacing(400)};
+
+    ${theme.media.lg`
+    	height: ${theme.spacing(460)};
+		`}
   `}
 `;
 
@@ -33,9 +37,13 @@ export const SearchAdvise = styled.p`
 
 export const StyledInput = styled.input`
   ${({ theme }) => css`
-    width: ${theme.spacing(400)};
-    height: ${theme.spacing(25)};
+    width: ${theme.spacing(200)};
+    height: ${theme.spacing(30)};
 
+    ${theme.media.lg`    
+			width: ${theme.spacing(400)};
+    	height: ${theme.spacing(25)};
+`}
     ${theme.typography.variant.h6}
     background-color: ${theme.colors.gray5};
     border: ${theme.spacing(20)} solid ${theme.colors.gray5};

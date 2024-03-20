@@ -2,13 +2,17 @@
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import React, { PureComponent, RefObject } from 'react';
 
-import marker from '@/assets/images/marker.png';
+import marker from '@/assets/images/location.png';
 
 import { Container, MapContainer, SearchAdvise, SearchContainer, StyledInput } from './styled';
 import currenciesData from './coordinates.json';
 
-mapboxgl.accessToken =
+const accessToken =
   'pk.eyJ1IjoiY29mZnVzcyIsImEiOiJjbHR1NTlyaTEwcGd3MmpwamxmMHU0Z2NyIn0.eWlWfny6Ind8D_9O4P2kUQ';
+
+const mapboxStyle = 'mapbox://styles/coffuss/cltui250u00kj01pjazkzdihd';
+
+mapboxgl.accessToken = accessToken;
 
 interface Currency {
   type: string;
@@ -55,13 +59,21 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
 
     this.map = new mapboxgl.Map({
       container: this.mapContainer.current!,
-      style: 'mapbox://styles/coffuss/cltui250u00kj01pjazkzdihd',
+      style: mapboxStyle,
       attributionControl: false,
       center: [lng, lat] as LngLatLike,
       zoom,
     });
 
     this.map.on('load', () => {
+      this.map?.loadImage(marker, (error, image) => {
+        if (image) {
+          this.map!.addImage('marker-icon', image);
+        } else {
+          console.error('Failed to load the marker image.', error);
+        }
+      });
+
       this.updateMarkers();
     });
 
@@ -98,9 +110,7 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
       type: 'symbol',
       source: 'points',
       layout: {
-        'icon-image': marker,
-        'text-field': ['get', 'title'],
-        'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+        'icon-image': 'marker-icon',
         'text-offset': [0, 1.25],
         'text-anchor': 'top',
       },
