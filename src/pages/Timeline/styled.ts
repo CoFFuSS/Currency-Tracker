@@ -34,10 +34,10 @@ export const ControlBlock = styled.div`
 export const StyledInput = styled.input`
   ${({ theme }) => css`
     ${theme.typography.variant.h6}
+    width: ${theme.spacing(70)};
     max-width: ${theme.spacing(150)};
     margin-left: ${theme.spacing(8)};
     border-radius: ${theme.spacing(20)};
-    width: ${theme.spacing(70)};
     ${theme.media.lg`min-width: ${theme.spacing(130)};`}
   `}
 `;
