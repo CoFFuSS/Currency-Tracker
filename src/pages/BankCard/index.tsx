@@ -4,7 +4,14 @@ import React, { PureComponent, RefObject } from 'react';
 
 import marker from '@/assets/images/location.png';
 
-import { Container, MapContainer, SearchAdvise, SearchContainer, StyledInput } from './styled';
+import {
+  Container,
+  MapContainer,
+  SearchAdvise,
+  SearchContainer,
+  StyledInput,
+  StyledLoadingImage,
+} from './styled';
 import currenciesData from './coordinates.json';
 
 const accessToken =
@@ -32,6 +39,7 @@ interface BankCardPageState {
   zoom: number;
   searchQuery: string;
   currencies: Currency[];
+  loading: boolean;
 }
 
 export class BankCardPage extends PureComponent<{}, BankCardPageState> {
@@ -48,6 +56,7 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
       zoom: 12.5,
       searchQuery: '',
       currencies: currenciesData.features as Currency[],
+      loading: true,
     };
 
     this.mapContainer = React.createRef();
@@ -66,6 +75,8 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
     });
 
     this.map.on('load', () => {
+      this.setState({ loading: false });
+
       this.map?.loadImage(marker, (error, image) => {
         if (image) {
           this.map!.addImage('marker-icon', image);
@@ -77,7 +88,7 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
       this.updateMarkers();
     });
 
-    this.map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+    this.map.addControl(new mapboxgl.NavigationControl());
   }
 
   updateMarkers = () => {
@@ -111,8 +122,6 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
       source: 'points',
       layout: {
         'icon-image': 'marker-icon',
-        'text-offset': [0, 1.25],
-        'text-anchor': 'top',
       },
     });
   };
@@ -126,7 +135,7 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
   };
 
   render() {
-    const { searchQuery } = this.state;
+    const { searchQuery, loading } = this.state;
 
     return (
       <Container>
@@ -139,6 +148,8 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
             onChange={this.handleSearch}
           />
         </SearchContainer>
+        {loading && <StyledLoadingImage />}
+
         <MapContainer ref={this.mapContainer} />
       </Container>
     );

@@ -24,6 +24,24 @@ import {
   SubmitButton,
 } from './styled';
 
+export const labelData = {
+  selectedDate: {
+    text: 'Select Date:',
+    id: 'selected-date',
+    type: 'date',
+  },
+  minPrice: {
+    text: 'Minimum Price:',
+    id: 'min-price',
+    type: 'number',
+  },
+  maxPrice: {
+    text: 'Maximum Price:',
+    id: 'max-price',
+    type: 'number',
+  },
+};
+
 ChartJS.register(OhlcElement, OhlcController, CandlestickElement, CandlestickController);
 
 export class TimelinePage extends PureComponent<Props, State> implements Observer {
@@ -122,41 +140,35 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
     return (
       <form onSubmit={this.handleFormSubmit}>
         <ControlBlock>
-          <div>
-            <StyledLabel htmlFor='selected-date'>
-              Select Date:
-              <StyledInput
-                id='selected-date'
-                type='date'
-                value={selectedDate}
-                onChange={this.handleDateChange}
-              />
-            </StyledLabel>
-          </div>
+          <StyledLabel htmlFor='selected-date'>
+            Select Date:
+            <StyledInput
+              id='selected-date'
+              type='date'
+              value={selectedDate}
+              onChange={this.handleDateChange}
+            />
+          </StyledLabel>
 
-          <div>
-            <StyledLabel htmlFor='min-price'>
-              Minimum Price:
-              <StyledInput
-                id='min-price'
-                type='number'
-                value={minPrice}
-                onChange={this.handleMinPriceChange}
-              />
-            </StyledLabel>
-          </div>
+          <StyledLabel htmlFor='min-price'>
+            Minimum Price:
+            <StyledInput
+              id='min-price'
+              type='number'
+              value={minPrice}
+              onChange={this.handleMinPriceChange}
+            />
+          </StyledLabel>
 
-          <div>
-            <StyledLabel htmlFor='max-price'>
-              Maximum Price:
-              <StyledInput
-                id='max-price'
-                type='number'
-                value={maxPrice}
-                onChange={this.handleMaxPriceChange}
-              />
-            </StyledLabel>
-          </div>
+          <StyledLabel htmlFor='max-price'>
+            Maximum Price:
+            <StyledInput
+              id='max-price'
+              type='number'
+              value={maxPrice}
+              onChange={this.handleMaxPriceChange}
+            />
+          </StyledLabel>
 
           <ButtonContainer>
             <SubmitButton type='submit'>Submit</SubmitButton>
