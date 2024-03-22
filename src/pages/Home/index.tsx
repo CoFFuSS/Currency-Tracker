@@ -16,6 +16,7 @@ import {
   CardPrice,
   Container,
   SectionName,
+  StyledLoadingImage,
   StyledSection,
   SvgIcon,
 } from './styled';
@@ -40,7 +41,7 @@ export const HomePage = () => {
         disable={false}
       />
       {loading ? (
-        <h1>Loading</h1>
+        <StyledLoadingImage>Loading</StyledLoadingImage>
       ) : (
         <>
           <StyledSection>

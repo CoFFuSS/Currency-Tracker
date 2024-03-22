@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { CurrencyResponse } from '@/interfaces/common';
 import { getCurrenciesName, getCurrencyRelation } from '@/utils/mainPage';
+import { CurrencyResponse } from '@/types/common';
 
 import {
   Backdrop,

@@ -87,8 +87,6 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
 
       this.updateMarkers();
     });
-
-    this.map.addControl(new mapboxgl.NavigationControl());
   }
 
   updateMarkers = () => {

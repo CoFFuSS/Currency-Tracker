@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
 
+import LoadingImage from '@/assets/images/loadingImage.svg';
+
 export const Container = styled.div`
   ${({ theme }) => css`
     display: flex;
@@ -121,5 +123,20 @@ export const CardPrice = styled.p`
     margin: 0;
     ${theme.typography.variant.h10};
     color: ${theme.colors.blue};
+  `}
+`;
+
+export const StyledLoadingImage = styled(LoadingImage)`
+  ${({ theme }) => css`
+    display: flex;
+    align-self: center;
+    justify-content: center;
+
+    width: ${theme.spacing(216)};
+    height: ${theme.spacing(216)};
+    ${theme.media.lg`
+		  width: ${theme.spacing(460)};
+    	height: ${theme.spacing(460)};
+		`}
   `}
 `;
