@@ -53,7 +53,11 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
 
     const { minPrice, maxPrice, selectedDate } = this.state;
 
-    const newDataset = generateRandomCurrencyDataArray(minPrice!, maxPrice!, selectedDate!);
+    const newDataset = generateRandomCurrencyDataArray(
+      Number(minPrice!),
+      Number(maxPrice!),
+      selectedDate!,
+    );
 
     if (ctx) {
       this.chartInstance = new ChartJS(ctx, {
@@ -72,7 +76,7 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
     currencyObservable.unsubscribe(this);
   }
 
-  handleInputChange = (event: ChangeEvent<HTMLInputElement>, field: string) => {
+  handleInputChange = (field: string) => (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     this.setState({ [field]: value });
   };
@@ -84,7 +88,11 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
 
     const { scrollY } = window;
 
-    const newDataset = generateRandomCurrencyDataArray(minPrice!, maxPrice!, selectedDate!);
+    const newDataset = generateRandomCurrencyDataArray(
+      Number(minPrice!),
+      Number(maxPrice!),
+      selectedDate!,
+    );
 
     currencyObservable.setData(newDataset, Number(minPrice!), Number(maxPrice!));
 
@@ -131,7 +139,7 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
                 id={id}
                 type={type}
                 value={inputValues[id]}
-                onChange={(e) => this.handleInputChange(e, id)}
+                onChange={this.handleInputChange(id)}
               />
             </StyledLabel>
           ))}

@@ -6,8 +6,11 @@ export const labelProperties = [
   { text: 'Maximum Price:', id: 'maxPrice', type: 'number' },
 ];
 
-export const getRandomDataWithArguments = (min: number, max: number) =>
-  Number(Math.random() * (max - min + 1) + min);
+export const getRandomDataWithArguments = (min: number, max: number) => {
+  console.log(min, max);
+
+  return Number(Math.random() * (max - min + 1) + min);
+};
 
 const dayMilliseconds = 24 * 60 * 60 * 1000;
 
