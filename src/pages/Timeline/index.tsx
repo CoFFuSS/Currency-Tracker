@@ -39,11 +39,7 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
   constructor(props: Props) {
     super(props);
 
-    this.chartRef = createRef<HTMLCanvasElement>();
-
     this.state = {
-      chartDataset: [],
-
       minPrice: 0,
 
       maxPrice: 1000,
@@ -55,13 +51,15 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
   componentDidMount(): void {
     const ctx = this.chartRef.current?.getContext('2d');
 
-    const { chartDataset, minPrice, maxPrice } = this.state;
+    const { minPrice, maxPrice, selectedDate } = this.state;
+
+    const newDataset = generateRandomCurrencyDataArray(minPrice!, maxPrice!, selectedDate!);
 
     if (ctx) {
       this.chartInstance = new ChartJS(ctx, {
         type: 'candlestick',
 
-        data: getChartDataset(chartDataset),
+        data: getChartDataset(newDataset),
 
         options: getChartOptions(minPrice!, maxPrice!),
       });
@@ -88,9 +86,7 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
 
     const newDataset = generateRandomCurrencyDataArray(minPrice!, maxPrice!, selectedDate!);
 
-    this.setState({ chartDataset: newDataset });
-
-    currencyObservable.setData(newDataset, minPrice!, maxPrice!);
+    currencyObservable.setData(newDataset, Number(minPrice!), Number(maxPrice!));
 
     window.scrollTo(0, scrollY);
   };
