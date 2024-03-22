@@ -40,7 +40,8 @@ export interface Props {}
 
 export interface State {
   chartDataset: CandlestickData[];
-  minPrice: number;
-  maxPrice: number;
-  selectedDate: string;
+  minPrice?: number;
+  maxPrice?: number;
+  [key: string]: unknown;
+  selectedDate?: string;
 }

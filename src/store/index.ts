@@ -4,14 +4,11 @@ import { makeAutoObservable } from 'mobx';
 import { darkTheme, lightTheme } from '@/theme';
 import { STORAGE_KEYS } from '@/constants';
 import { Theme } from '@/types/theme';
-import { CurrencyResponse } from '@/types/common';
 
 class ThemeSwitcher {
   private _theme: Theme = darkTheme;
 
   private _themeMode = 'dark';
-
-  private _currencyResponse: CurrencyResponse = { meta: { last_updated_at: '' }, data: {} };
 
   constructor() {
     makeAutoObservable(this);
@@ -24,14 +21,6 @@ class ThemeSwitcher {
 
   get theme(): Theme {
     return this._theme;
-  }
-
-  get currencyResponse(): CurrencyResponse {
-    return this._currencyResponse;
-  }
-
-  setCurrencyResponse(value: CurrencyResponse) {
-    this._currencyResponse = value;
   }
 
   toggleTheme() {

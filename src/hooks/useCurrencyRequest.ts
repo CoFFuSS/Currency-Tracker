@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 import { CACHE_LIFETIME } from '@/constants';
 import { CurrencyResponse } from '@/types/common';
-import themeSwitcher from '@/store';
 
 export const useCurrencyRequest = () => {
   const [currency, setCurrency] = useState<CurrencyResponse | undefined>();
@@ -43,8 +42,6 @@ export const useCurrencyRequest = () => {
           setLoading(false);
         });
   }, []);
-
-  if (currency) themeSwitcher.setCurrencyResponse(currency);
 
   return { currency, loading, error };
 };
