@@ -1,7 +1,7 @@
 {
   "name": "react-app",
   "version": "0.1.0",
-  "homepage": "https://CoFFuSS.Currency-Tracker.io",
+  "homepage": "https://CoFFuSS.github.io/Currency-Tracker/",
   "private": false,
   "main": "./src/index.tsx",
   "description": "react app",
@@ -21,7 +21,6 @@
     ]
   },
   "scripts": {
-    "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "dev": "webpack serve --config webpack/webpack.config.ts --mode=development --history-api-fallback --open",
     "build": "webpack --config webpack/webpack.config.ts --mode=production",
