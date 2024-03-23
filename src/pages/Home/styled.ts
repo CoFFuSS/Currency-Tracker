@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+import LoadingImage from '@/assets/images/loadingImage.svg';
+
+export const Container = styled.section`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
@@ -16,7 +18,7 @@ export const Container = styled.div`
   `}
 `;
 
-export const StyledSection = styled.section`
+export const StyledSection = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
@@ -121,5 +123,20 @@ export const CardPrice = styled.p`
     margin: 0;
     ${theme.typography.variant.h10};
     color: ${theme.colors.blue};
+  `}
+`;
+
+export const StyledLoadingImage = styled(LoadingImage)`
+  ${({ theme }) => css`
+    display: flex;
+    align-self: center;
+    justify-content: center;
+
+    width: ${theme.spacing(216)};
+    height: ${theme.spacing(216)};
+    ${theme.media.lg`
+		  width: ${theme.spacing(460)};
+    	height: ${theme.spacing(460)};
+		`}
   `}
 `;

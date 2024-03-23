@@ -1,8 +1,9 @@
 /* eslint-disable import/no-import-module-exports */
 /* eslint-disable import/no-extraneous-dependencies */
+import { Configuration, ProgressPlugin } from 'webpack';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { Configuration, ProgressPlugin } from 'webpack';
+import Dotenv from 'dotenv-webpack';
 
 import path from 'path';
 
@@ -92,6 +93,8 @@ const commonConfig: Configuration = {
     new ProgressPlugin((percentage, message, ...args) => {
       console.info(percentage, message, ...args);
     }),
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    new Dotenv(),
   ],
 };
 

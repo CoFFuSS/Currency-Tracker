@@ -3,13 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import { CACHE_LIFETIME } from '@/constants';
-
-interface CurrencyResponse {
-  meta: {
-    last_updated_at: string;
-  };
-  data: Record<string, { code: string; value: string }>;
-}
+import { CurrencyResponse } from '@/types/common';
 
 export const useCurrencyRequest = () => {
   const [currency, setCurrency] = useState<CurrencyResponse | undefined>();

@@ -1,5 +1,11 @@
 import { CandlestickData } from '@/types/timelinePage';
 
+export const labelProperties = [
+  { text: 'Select Date:', id: 'selectedDate', type: 'date' },
+  { text: 'Minimum Price:', id: 'minPrice', type: 'number' },
+  { text: 'Maximum Price:', id: 'maxPrice', type: 'number' },
+];
+
 export const getRandomDataWithArguments = (min: number, max: number) =>
   Number(Math.random() * (max - min + 1) + min);
 

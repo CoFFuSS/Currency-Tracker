@@ -19,14 +19,14 @@ class ThemeSwitcher {
     return this._themeMode;
   }
 
+  get theme(): Theme {
+    return this._theme;
+  }
+
   toggleTheme() {
     this._theme = this._themeMode === 'light' ? darkTheme : lightTheme;
     this._themeMode = this._themeMode === 'light' ? 'dark' : 'light';
     this.saveThemeToStorage();
-  }
-
-  get theme(): Theme {
-    return this._theme;
   }
 
   private saveThemeToStorage() {

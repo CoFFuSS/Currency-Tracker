@@ -1,13 +1,18 @@
-import { ContactBlock, Container, GeneralText, SubText } from './styled';
+import { Address, ContactBlock, ContactItem, Container, GeneralText } from './styled';
 
-export const ContactPage = (): JSX.Element => (
+export const ContactPage = () => (
   <Container>
     <GeneralText>Our office located at</GeneralText>
-    <SubText>city Vitebsk street Mongola building 3 </SubText>
+    <Address>street Lienina, Vitebsk, Belarus</Address>
     <GeneralText>Contact us</GeneralText>
     <ContactBlock>
-      <SubText>email: business@money.kz</SubText>
-      <SubText>phone: +14888841</SubText>
+      <ContactItem
+        as='a'
+        href='mailto:business@money.kz'
+      >
+        business@money.kz
+      </ContactItem>
+      <ContactItem>+14888841</ContactItem>
     </ContactBlock>
   </Container>
 );

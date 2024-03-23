@@ -1,4 +1,4 @@
-import { CurrencyResponse } from '@/interfaces/common';
+import { CurrencyResponse } from '@/types/common';
 
 export const getSpecificCurrencyValue = (name: string, currency: CurrencyResponse | undefined) => {
   const filteredCurrencies = Object.values(currency?.data ?? {}).filter(

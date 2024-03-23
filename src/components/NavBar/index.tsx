@@ -2,7 +2,7 @@ import { Container, ImageContainer, StyledLogo } from './styled';
 import { LinkElement } from './Links';
 import { ThemeSwitcher } from './ThemeSwitcher';
 
-export const NavBar = (): JSX.Element => (
+export const NavBar = () => (
   <Container>
     <ImageContainer to='/'>
       <StyledLogo />

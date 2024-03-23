@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { Chart as ChartJS } from 'chart.js/auto';
-import { PureComponent, createRef } from 'react';
+import { ChangeEvent, PureComponent, createRef } from 'react';
 import {
   CandlestickController,
   CandlestickElement,
@@ -14,7 +14,12 @@ import 'chartjs-adapter-moment';
 import { CandlestickData, Props, State } from '@/types/timelinePage';
 import { Observer, currencyObservable } from '@/utils/observer';
 
-import { generateRandomCurrencyDataArray, getChartDataset, getChartOptions } from './utils';
+import {
+  generateRandomCurrencyDataArray,
+  getChartDataset,
+  getChartOptions,
+  labelProperties,
+} from './utils';
 import {
   ButtonContainer,
   ChartContainer,
@@ -23,24 +28,6 @@ import {
   StyledLabel,
   SubmitButton,
 } from './styled';
-
-export const labelData = {
-  selectedDate: {
-    text: 'Select Date:',
-    id: 'selected-date',
-    type: 'date',
-  },
-  minPrice: {
-    text: 'Minimum Price:',
-    id: 'min-price',
-    type: 'number',
-  },
-  maxPrice: {
-    text: 'Maximum Price:',
-    id: 'max-price',
-    type: 'number',
-  },
-};
 
 ChartJS.register(OhlcElement, OhlcController, CandlestickElement, CandlestickController);
 
@@ -52,11 +39,7 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
   constructor(props: Props) {
     super(props);
 
-    this.chartRef = createRef<HTMLCanvasElement>();
-
     this.state = {
-      chartDataset: [],
-
       minPrice: 0,
 
       maxPrice: 1000,
@@ -68,15 +51,21 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
   componentDidMount(): void {
     const ctx = this.chartRef.current?.getContext('2d');
 
-    const { chartDataset, minPrice, maxPrice } = this.state;
+    const { minPrice, maxPrice, selectedDate } = this.state;
+
+    const newDataset = generateRandomCurrencyDataArray(
+      Number(minPrice!),
+      Number(maxPrice!),
+      selectedDate!,
+    );
 
     if (ctx) {
       this.chartInstance = new ChartJS(ctx, {
         type: 'candlestick',
 
-        data: getChartDataset(chartDataset),
+        data: getChartDataset(newDataset),
 
-        options: getChartOptions(minPrice, maxPrice),
+        options: getChartOptions(minPrice!, maxPrice!),
       });
     }
 
@@ -87,16 +76,9 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
     currencyObservable.unsubscribe(this);
   }
 
-  handleMinPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ minPrice: parseFloat(event.target.value) });
-  };
-
-  handleMaxPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ maxPrice: parseFloat(event.target.value) });
-  };
-
-  handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ selectedDate: event.target.value });
+  handleInputChange = (field: string) => (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    this.setState({ [field]: value });
   };
 
   handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -106,11 +88,13 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
 
     const { scrollY } = window;
 
-    const newDataset = generateRandomCurrencyDataArray(minPrice, maxPrice, selectedDate);
+    const newDataset = generateRandomCurrencyDataArray(
+      Number(minPrice!),
+      Number(maxPrice!),
+      selectedDate!,
+    );
 
-    this.setState({ chartDataset: newDataset });
-
-    currencyObservable.setData(newDataset, minPrice, maxPrice);
+    currencyObservable.setData(newDataset, Number(minPrice!), Number(maxPrice!));
 
     window.scrollTo(0, scrollY);
   };
@@ -136,40 +120,29 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
 
   render() {
     const { minPrice, maxPrice, selectedDate } = this.state;
+    const inputValues: Record<string, string | number> = {
+      selectedDate: selectedDate ?? '',
+      minPrice: Number(minPrice),
+      maxPrice: Number(maxPrice),
+    };
 
     return (
       <form onSubmit={this.handleFormSubmit}>
         <ControlBlock>
-          <StyledLabel htmlFor='selected-date'>
-            Select Date:
-            <StyledInput
-              id='selected-date'
-              type='date'
-              value={selectedDate}
-              onChange={this.handleDateChange}
-            />
-          </StyledLabel>
-
-          <StyledLabel htmlFor='min-price'>
-            Minimum Price:
-            <StyledInput
-              id='min-price'
-              type='number'
-              value={minPrice}
-              onChange={this.handleMinPriceChange}
-            />
-          </StyledLabel>
-
-          <StyledLabel htmlFor='max-price'>
-            Maximum Price:
-            <StyledInput
-              id='max-price'
-              type='number'
-              value={maxPrice}
-              onChange={this.handleMaxPriceChange}
-            />
-          </StyledLabel>
-
+          {labelProperties.map(({ text, id, type }) => (
+            <StyledLabel
+              key={id}
+              htmlFor={id}
+            >
+              {text}
+              <StyledInput
+                id={id}
+                type={type}
+                value={inputValues[id]}
+                onChange={this.handleInputChange(id)}
+              />
+            </StyledLabel>
+          ))}
           <ButtonContainer>
             <SubmitButton type='submit'>Submit</SubmitButton>
           </ButtonContainer>

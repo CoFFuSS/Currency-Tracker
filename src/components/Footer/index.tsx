@@ -1,4 +1,5 @@
 import { routesOptions } from '@/constants/footerRoutes';
+import { ExpandableField } from '@/components/ExpandableField';
 
 import {
   Container,
@@ -12,8 +13,6 @@ import {
   Title,
   TitleBlock,
 } from './styled';
-
-import { ExpandableField } from '../ExpandableField';
 
 export const Footer = () => (
   <Container>

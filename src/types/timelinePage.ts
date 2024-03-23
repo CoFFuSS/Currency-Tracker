@@ -39,8 +39,7 @@ export interface Options {
 export interface Props {}
 
 export interface State {
-  chartDataset: CandlestickData[];
-  minPrice: number;
-  maxPrice: number;
-  selectedDate: string;
+  minPrice?: number;
+  maxPrice?: number;
+  selectedDate?: string;
 }
