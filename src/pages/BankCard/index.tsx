@@ -3,6 +3,7 @@ import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import React, { PureComponent, RefObject } from 'react';
 
 import marker from '@/assets/images/location.png';
+import { BankCardPageState, Currency } from '@/types/bankcardPage';
 
 import {
   Container,
@@ -14,33 +15,9 @@ import {
 } from './styled';
 import currenciesData from './coordinates.json';
 
-const accessToken =
-  'pk.eyJ1IjoiY29mZnVzcyIsImEiOiJjbHR1NTlyaTEwcGd3MmpwamxmMHU0Z2NyIn0.eWlWfny6Ind8D_9O4P2kUQ';
-
 const mapboxStyle = 'mapbox://styles/coffuss/cltui250u00kj01pjazkzdihd';
 
-mapboxgl.accessToken = accessToken;
-
-interface Currency {
-  type: string;
-  properties: {
-    title: string;
-    description: string;
-  };
-  geometry: {
-    coordinates: [number, number];
-    type: string;
-  };
-}
-
-interface BankCardPageState {
-  lng: number;
-  lat: number;
-  zoom: number;
-  searchQuery: string;
-  currencies: Currency[];
-  loading: boolean;
-}
+mapboxgl.accessToken = process.env.MAPBOX_API_KEY as string;
 
 export class BankCardPage extends PureComponent<{}, BankCardPageState> {
   private readonly mapContainer: RefObject<HTMLDivElement>;

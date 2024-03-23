@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 
 import { getCurrenciesName, getCurrencyRelation } from '@/utils/mainPage';
 import { CurrencyResponse } from '@/types/common';
+import { CurrenciesList } from '@/components/CurrenciesList';
 
 import {
   Backdrop,
@@ -15,8 +16,6 @@ import {
   InfoContainer,
   InputContainer,
 } from './styled';
-
-import { CurrenciesList } from '../CurrenciesList';
 
 interface CurrencyModalProps {
   isShown: boolean;
@@ -63,7 +62,7 @@ export const CurrencyModal = ({
             <CloseButton onClick={handleClose}>X</CloseButton>
           </Header>
           <Content>
-            <p>Conver corrency from</p>
+            <p>Convert currency from</p>
             <InfoContainer>
               <CurrenciesList
                 setSelectedCurrency={setSelectedCurrency}

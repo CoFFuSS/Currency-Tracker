@@ -13,7 +13,7 @@ export const MapContainer = styled.div`
   `}
 `;
 
-export const Container = styled.div`
+export const Container = styled.section`
   display: flex;
   flex-direction: column;
 `;

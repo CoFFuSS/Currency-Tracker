@@ -4,7 +4,7 @@ import { LinkContainer, StyledLink } from './styled';
 
 const { NAV_ROUTES } = options;
 
-export const LinkElement = (): JSX.Element => (
+export const LinkElement = () => (
   <LinkContainer>
     {NAV_ROUTES.map(({ to, name }) => (
       <StyledLink

@@ -8,7 +8,7 @@ import {
   Content,
 } from './styled';
 
-export const Header = (): JSX.Element => (
+export const Header = () => (
   <HeaderContainer>
     <Content>
       <TextContainer>

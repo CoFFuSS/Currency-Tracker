@@ -2,7 +2,11 @@
 /* eslint-disable react/destructuring-assignment */
 import { Component, ErrorInfo, ReactNode } from 'react';
 
-import { Container, TextField } from './styled';
+import { NavBar } from '@/components/NavBar';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+
+import { Container, PageContainer, PageWrapper, TextField } from './styled';
 
 interface Props {
   children?: ReactNode;
@@ -12,7 +16,7 @@ interface State {
   hasError: boolean;
 }
 
-class ErrorBoundary extends Component<Props, State> {
+export class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,
   };
@@ -29,14 +33,19 @@ class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <Container>
-          <TextField>Opps something went wrong</TextField>
-        </Container>
+        <PageWrapper>
+          <PageContainer>
+            <NavBar />
+            <Header />
+            <Container>
+              <TextField>Opps something went wrong</TextField>
+            </Container>
+            <Footer />
+          </PageContainer>
+        </PageWrapper>
       );
     }
 
     return this.props.children;
   }
 }
-
-export default ErrorBoundary;

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 import LoadingImage from '@/assets/images/loadingImage.svg';
 
-export const Container = styled.div`
+export const Container = styled.section`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@ export const Container = styled.div`
   `}
 `;
 
-export const StyledSection = styled.section`
+export const StyledSection = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;

@@ -1,6 +1,6 @@
 import { ContactBlock, Container, GeneralText, SubText } from './styled';
 
-export const ContactPage = (): JSX.Element => (
+export const ContactPage = () => (
   <Container>
     <GeneralText>Our office located at</GeneralText>
     <SubText>city Vitebsk street Mongola building 3 </SubText>
