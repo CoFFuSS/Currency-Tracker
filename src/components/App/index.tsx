@@ -9,7 +9,7 @@ import ROUTES from '@/constants/navRoutes';
 
 import { GlobalStyle } from './styled';
 
-export const App = observer(() => (
+const App = observer(() => (
   <ThemeProvider theme={themeSwitcher.theme}>
     <GlobalStyle />
     <Routes>
@@ -28,3 +28,5 @@ export const App = observer(() => (
     </Routes>
   </ThemeProvider>
 ));
+
+export default App;
