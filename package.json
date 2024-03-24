@@ -1,6 +1,7 @@
 {
   "name": "react-app",
   "version": "0.1.0",
+  "homepage": "https://CoFFuSS.github.io/Currency-Tracker/",
   "private": false,
   "main": "./src/index.tsx",
   "description": "react app",
@@ -20,6 +21,7 @@
     ]
   },
   "scripts": {
+    "deploy": "gh-pages -d build",
     "dev": "webpack serve --config webpack/webpack.config.ts --mode=development --history-api-fallback --open",
     "build": "webpack --config webpack/webpack.config.ts --mode=production",
     "types:check": "tsc --noEmit"
@@ -40,6 +42,8 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@svgr/webpack": "^8.1.0",
     "@swc/core": "^1.3.99",
+    "@types/dotenv-webpack": "^7.0.7",
+    "@types/mapbox-gl": "^3.1.0",
     "@types/node": "^20.10.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
@@ -50,15 +54,23 @@
     "@types/webpack-dev-server": "^4.7.2",
     "@typescript-eslint/eslint-plugin": "^6.13.0",
     "@typescript-eslint/parser": "^6.13.0",
+    "axios": "^1.6.7",
     "babel-loader": "^8.2.5",
     "babel-plugin-jsx-remove-data-test-id": "^3.0.0",
+    "chart.js": "^4.4.2",
+    "chartjs-adapter-luxon": "^1.3.1",
+    "chartjs-adapter-moment": "^1.0.1",
+    "chartjs-chart-financial": "^0.1.1",
     "compression-webpack-plugin": "^10.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
+    "dotenv-webpack": "^8.1.0",
     "eslint": "^8.54.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-prettier": "^5.0.1",
@@ -67,11 +79,18 @@
     "eslint-plugin-sonarjs": "^0.24.0",
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^9.0.2",
+    "gh-pages": "^6.1.1",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.0",
     "husky": "8.0.3",
     "lint-staged": "13.2.2",
+    "luxon": "^3.4.4",
+    "mapbox-gl": "^3.2.0",
     "mini-css-extract-plugin": "^2.7.6",
+    "mobx": "^6.12.0",
+    "mobx-react-lite": "^4.0.5",
+    "moment": "^2.30.1",
+    "msw": "^2.2.3",
     "postcss": "^8.4.35",
     "postcss-styled-syntax": "^0.6.4",
     "prettier": "^3.1.0",
@@ -110,5 +129,10 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

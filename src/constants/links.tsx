@@ -1,34 +1,20 @@
 export const options = {
-  NAV_ROUTS: [
+  NAV_ROUTES: [
     {
       to: '/',
       name: 'Home',
     },
     {
-      to: 'contact',
-      name: 'Contact',
+      to: 'timeline',
+      name: 'TimeLine',
     },
     {
       to: 'bankcard',
       name: 'BankCard',
     },
     {
-      to: 'timeline',
-      name: 'TimeLine',
-    },
-  ],
-  FOOTER_ROUTS: [
-    {
-      to: 'general',
-      name: 'General',
-    },
-    {
-      to: 'product',
-      name: 'Product',
-    },
-    {
-      to: 'community',
-      name: 'Community',
+      to: 'contact',
+      name: 'Contact',
     },
   ],
 };
