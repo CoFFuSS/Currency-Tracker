@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import CompressionPlugin from 'compression-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import type { JsMinifyOptions as SwcOptions } from '@swc/core';
@@ -9,12 +8,12 @@ import CopyPlugin from 'copy-webpack-plugin';
 
 import path from 'path';
 
-import { ENV_MODE_MAP, FILES_THRESHOLD, HOST, PATHS, PORT } from './common/constants';
+import { ENV_MODE_MAP, FILES_THRESHOLD, PATHS } from './common/constants';
 import { RuleBuilder } from './builders/rule';
 import { PluginBuilder } from './builders/plugin';
 import { ConfigFunc } from './types/env';
 
-const prodConfig: ConfigFunc<'prod'> = ({ env }, { mode }) => {
+const prodConfig: ConfigFunc<'prod'> = ({ env }) => {
   const envMode = ENV_MODE_MAP[env];
 
   return {
@@ -88,11 +87,11 @@ const prodConfig: ConfigFunc<'prod'> = ({ env }, { mode }) => {
         filename: 'css/[name].[contenthash:8].css',
         chunkFilename: 'css/[name].[contenthash:8].css',
       }),
-      new BundleAnalyzerPlugin({
-        analyzerMode: mode === 'development' ? 'disabled' : 'server',
-        analyzerPort: +PORT,
-        analyzerHost: HOST,
-      }),
+      // new BundleAnalyzerPlugin({
+      //   analyzerMode: mode === 'development' ? 'disabled' : 'server',
+      //   analyzerPort: +PORT,
+      //   analyzerHost: HOST,
+      // }),
       new ForkTsCheckerWebpackPlugin(),
       new CopyPlugin({
         patterns: [
