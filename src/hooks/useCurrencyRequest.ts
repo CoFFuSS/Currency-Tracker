@@ -20,11 +20,7 @@ export const useCurrencyRequest = () => {
       setLoading(false);
     } else
       axios
-        .get<CurrencyResponse>('/api/currencies', {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
+        .get<CurrencyResponse>('/api/currencies', {})
         .then((response) => {
           setCurrency(response.data);
 
