@@ -1,7 +1,6 @@
 {
   "name": "react-app",
   "version": "0.1.0",
-  "homepage": "https://CoFFuSS.github.io/Currency-Tracker/",
   "private": false,
   "main": "./src/index.tsx",
   "description": "react app",

@@ -9,23 +9,27 @@ import ROUTES from '@/constants/navRoutes';
 
 import { GlobalStyle } from './styled';
 
+import { ErrorBoundary } from '../ErrorBoundary';
+
 const App = observer(() => (
   <ThemeProvider theme={themeSwitcher.theme}>
-    <GlobalStyle />
-    <Routes>
-      <Route
-        path='/'
-        element={<BasicLayout />}
-      >
-        {ROUTES.map(({ path, element }) => (
-          <Route
-            path={path}
-            element={element}
-            key={path}
-          />
-        ))}
-      </Route>
-    </Routes>
+    <ErrorBoundary>
+      <GlobalStyle />
+      <Routes>
+        <Route
+          path='/'
+          element={<BasicLayout />}
+        >
+          {ROUTES.map(({ path, element }) => (
+            <Route
+              path={path}
+              element={element}
+              key={path}
+            />
+          ))}
+        </Route>
+      </Routes>
+    </ErrorBoundary>
   </ThemeProvider>
 ));
 
