@@ -4,7 +4,6 @@ import { Configuration, ProgressPlugin } from 'webpack';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Dotenv from 'dotenv-webpack';
-import CopyPlugin from 'copy-webpack-plugin';
 
 import path from 'path';
 
@@ -96,9 +95,6 @@ const commonConfig: Configuration = {
     }),
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     new Dotenv(),
-    new CopyPlugin({
-      patterns: [{ from: 'public/mockServiceWorker.js', to: path.resolve(__dirname, 'build') }],
-    }),
   ],
 };
 

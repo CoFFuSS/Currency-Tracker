@@ -36,5 +36,5 @@
 
   "exclude": ["node_modules", "dist", "build", ".vscode"],
 
-  "include": ["typings/*.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["typings/*.d.ts", "**/*.ts", "**/*.tsx", "src/mocks/browser.js", "src/mocks/handlers.js"]
 }

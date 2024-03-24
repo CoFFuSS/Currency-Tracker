@@ -17,7 +17,7 @@ import currenciesData from './coordinates.json';
 
 const mapboxStyle = 'mapbox://styles/coffuss/cltui250u00kj01pjazkzdihd';
 
-mapboxgl.accessToken = process.env.MAPBOX_API_KEY as string;
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY!;
 
 export class BankCardPage extends PureComponent<{}, BankCardPageState> {
   private readonly mapContainer: RefObject<HTMLDivElement>;

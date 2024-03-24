@@ -11,8 +11,6 @@ async function enableMocking() {
       return scriptUrl.includes('mockServiceWorker');
     },
   });
-
-  return null;
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
