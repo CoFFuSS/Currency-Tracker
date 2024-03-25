@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import { Chart as ChartJS } from 'chart.js/auto';
 import { ChangeEvent, PureComponent, createRef } from 'react';
 import {
@@ -23,9 +21,9 @@ import {
 import {
   ButtonContainer,
   ChartContainer,
+  ChartInput,
   ControlBlock,
-  StyledInput,
-  StyledLabel,
+  InputLabel,
   SubmitButton,
 } from './styled';
 
@@ -130,18 +128,18 @@ export class TimelinePage extends PureComponent<Props, State> implements Observe
       <form onSubmit={this.handleFormSubmit}>
         <ControlBlock>
           {labelProperties.map(({ text, id, type }) => (
-            <StyledLabel
+            <InputLabel
               key={id}
               htmlFor={id}
             >
               {text}
-              <StyledInput
+              <ChartInput
                 id={id}
                 type={type}
                 value={inputValues[id]}
                 onChange={this.handleInputChange(id)}
               />
-            </StyledLabel>
+            </InputLabel>
           ))}
           <ButtonContainer>
             <SubmitButton type='submit'>Submit</SubmitButton>

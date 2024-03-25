@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import React, { PureComponent, RefObject } from 'react';
 
@@ -17,7 +16,8 @@ import currenciesData from './coordinates.json';
 
 const mapboxStyle = 'mapbox://styles/coffuss/cltui250u00kj01pjazkzdihd';
 
-mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY!;
+const apiKey: string = String(process.env.REACT_APP_MAPBOX_API_KEY);
+mapboxgl.accessToken = `${apiKey}`;
 
 export class BankCardPage extends PureComponent<{}, BankCardPageState> {
   private readonly mapContainer: RefObject<HTMLDivElement>;
