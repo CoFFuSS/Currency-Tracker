@@ -1,6 +1,6 @@
 import { useCurrencyRequest } from '@/hooks/useCurrencyRequest';
 
-import { Container, LastUpdate, LoadingText, StyledTimeImage } from './styled';
+import { Container, LastUpdate, LoadingText, TimeUpdateImage } from './styled';
 
 export const UpdateTime = () => {
   const { currency, loading } = useCurrencyRequest();
@@ -21,7 +21,7 @@ export const UpdateTime = () => {
         <LoadingText>Loading...</LoadingText>
       ) : (
         <>
-          <StyledTimeImage />
+          <TimeUpdateImage />
           <LastUpdate>Last updated ad {formatDate()}</LastUpdate>
         </>
       )}

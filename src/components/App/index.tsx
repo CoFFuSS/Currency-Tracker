@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 
 import themeSwitcher from '@/store';
 import { BasicLayout } from '@/components/BasicLayout';
-import ROUTES from '@/constants/navRoutes';
+import { ROUTES } from '@/constants/navRoutes';
 
 import { GlobalStyle } from './styled';
 

@@ -35,7 +35,7 @@ export const ImageContainer = styled(Link)`
   `};
 `;
 
-export const StyledLogo = styled(Logo)`
+export const NavBarLogo = styled(Logo)`
   ${({ theme }) => css`
     cursor: pointer;
     width: ${theme.spacing(12)};

@@ -64,7 +64,7 @@ export const LogoContainer = styled.div`
   `}
 `;
 
-export const StyledLogo = styled(Logo)`
+export const FooterLogo = styled(Logo)`
   ${({ theme }) => css`
     display: flex;
     width: ${theme.spacing(30)};
@@ -118,8 +118,10 @@ export const CopyrightText = styled.p`
   `}
 `;
 
-export const StyledLink = styled(Link)`
+export const FooterLink = styled(Link)`
   ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
     color: ${theme.colors.gray5};
     text-decoration: none;
     ${theme.typography.variant.h5}

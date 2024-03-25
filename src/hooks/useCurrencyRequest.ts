@@ -38,5 +38,5 @@ export const useCurrencyRequest = () => {
         });
   }, []);
 
-  return { currency, loading, error };
+  return { currency, loading, error } as const;
 };

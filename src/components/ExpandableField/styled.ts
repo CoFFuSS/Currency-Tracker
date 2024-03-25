@@ -51,7 +51,7 @@ export const TitleText = styled.span`
   `}
 `;
 
-export const StyledArrow = styled(Icon)`
+export const ArrowIcon = styled(Icon)`
   ${({ theme }) => css`
     fill: ${theme.colors.secondary};
 

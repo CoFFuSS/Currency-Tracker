@@ -8,13 +8,13 @@ import { CurrenciesList } from '@/components/CurrenciesList';
 import {
   Backdrop,
   Wrapper,
-  StyledModal,
   HeaderText,
   CloseButton,
   Content,
   Header,
   InfoContainer,
   InputContainer,
+  ModalWindow,
 } from './styled';
 
 interface CurrencyModalProps {
@@ -56,7 +56,7 @@ export const CurrencyModal = ({
     <>
       <Backdrop />
       <Wrapper>
-        <StyledModal isShown={isShown}>
+        <ModalWindow isShown={isShown}>
           <Header>
             <HeaderText>Exchange rate</HeaderText>
             <CloseButton onClick={handleClose}>X</CloseButton>
@@ -100,7 +100,7 @@ export const CurrencyModal = ({
               </InputContainer>
             </InfoContainer>
           </Content>
-        </StyledModal>
+        </ModalWindow>
       </Wrapper>
     </>
   );

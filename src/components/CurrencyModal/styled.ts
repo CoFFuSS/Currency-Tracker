@@ -54,7 +54,7 @@ const ModalCloseAnimation = keyframes`
   }
 `;
 
-export const StyledModal = styled.div<{ isShown: boolean }>`
+export const ModalWindow = styled.div<{ isShown: boolean }>`
   ${({ theme, isShown }) => css`
     position: relative;
     z-index: 100;

@@ -20,17 +20,17 @@ export const THEME_COLORS = {
 export const THEME_BOX_SHADOWS = {
   header: '0px 0px 3px #000000',
   subheader: '0px 3px 3px #00000080',
-};
+} as const;
 
 export const THEME_FONT_FAMILIES = {
   primary: 'Poppins, sans-serif',
   secondary: 'Poppins, system-ui',
-};
+} as const;
 
 export const THEME_LINEAR_GRADIENT = {
   header: '67deg, rgb(0 0 0 / 100%) 0%, rgb(25 54 34 / 100%) 60%, rgb(18 18 18 / 100%) 100%',
   headerText: '90.18deg, #00ce2c 0.18%, #aedf23 49.3%, #a3dc00 99.88%',
-};
+} as const;
 
 export const THEME_FONT_WEIGHT = {
   light: '100',
@@ -78,7 +78,7 @@ export const THEME_TYPOGRAPHY_VARIANTS: TypographyVariants = {
     font-weight: 300;
     line-height: ${16 / 12};
     ${media.lg`
-			
+
 			font-family: ${THEME_FONT_FAMILIES.primary};
     	font-size: ${pxToRem(32)};
     	font-weight: 300;
@@ -145,4 +145,4 @@ export const THEME_TYPOGRAPHY_VARIANTS: TypographyVariants = {
 
 		`}
   `,
-};
+} as const;
