@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
 
 import Icon from '@/assets/images/Down_Arrow.svg';

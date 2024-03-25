@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
 
 import TimeImage from '@/assets/images/circle animation.svg';

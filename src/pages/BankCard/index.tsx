@@ -6,11 +6,11 @@ import { BankCardPageState, Currency } from '@/types/bankcardPage';
 
 import {
   Container,
+  LoadingImage,
   MapContainer,
   SearchAdvise,
   SearchContainer,
-  StyledInput,
-  StyledLoadingImage,
+  SearchInput,
 } from './styled';
 import currenciesData from './coordinates.json';
 
@@ -116,14 +116,14 @@ export class BankCardPage extends PureComponent<{}, BankCardPageState> {
       <Container>
         <SearchContainer>
           <SearchAdvise>Search currency in the blank</SearchAdvise>
-          <StyledInput
+          <SearchInput
             type='text'
             placeholder='Currency search...'
             value={searchQuery}
             onChange={this.handleSearch}
           />
         </SearchContainer>
-        {loading && <StyledLoadingImage />}
+        {loading && <LoadingImage />}
 
         <MapContainer ref={this.mapContainer} />
       </Container>

@@ -16,9 +16,9 @@ import {
   CardPrice,
   Container,
   SectionName,
-  StyledLoadingImage,
-  StyledSection,
+  CardSection,
   SvgIcon,
+  LoadingImage,
 } from './styled';
 
 export const HomePage = () => {
@@ -41,10 +41,10 @@ export const HomePage = () => {
         disable={false}
       />
       {loading ? (
-        <StyledLoadingImage>Loading</StyledLoadingImage>
+        <LoadingImage />
       ) : (
         <>
-          <StyledSection>
+          <CardSection>
             <CurrencyModal
               isShown={isShown}
               hide={toggle}
@@ -76,7 +76,7 @@ export const HomePage = () => {
                 </Card>
               ))}
             </CardContainer>
-          </StyledSection>
+          </CardSection>
         </>
       )}
       {error && <p>Error: {error}</p>}

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
 
 import Logo from '@/assets/images/HeaderLogo.svg';
@@ -71,7 +70,7 @@ export const LogoContainer = styled.div`
   `}
 `;
 
-export const StyledHeaderLogo = styled(Logo)`
+export const HeaderLogo = styled(Logo)`
   ${({ theme }) => css`
     display: none;
     width: ${theme.spacing(12)};

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import LoadingImage from '@/assets/images/loadingImage.svg';
+import Icon from '@/assets/images/loadingImage.svg';
 
 export const MapContainer = styled.div`
   ${({ theme }) => css`
@@ -37,12 +37,12 @@ export const SearchAdvise = styled.p`
   `}
 `;
 
-export const StyledInput = styled.input`
+export const SearchInput = styled.input`
   ${({ theme }) => css`
     width: ${theme.spacing(200)};
     height: ${theme.spacing(30)};
 
-    ${theme.media.lg`    
+    ${theme.media.lg`
 			width: ${theme.spacing(400)};
     	height: ${theme.spacing(25)};
 `}
@@ -61,7 +61,7 @@ export const StyledInput = styled.input`
   `}
 `;
 
-export const StyledLoadingImage = styled(LoadingImage)`
+export const LoadingImage = styled(Icon)`
   ${({ theme }) => css`
     display: flex;
     align-self: center;

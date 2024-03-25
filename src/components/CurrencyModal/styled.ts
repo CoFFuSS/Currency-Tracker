@@ -1,7 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
 
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
 export const Wrapper = styled.div`
   ${({ theme }) => css`
     position: fixed;
@@ -146,7 +144,7 @@ export const InfoContainer = styled.div`
 
     ${theme.media.lg`
     	width: ${theme.spacing(400)};
-			align-items: center;		
+			align-items: center;
 		`}
   `}
 `;

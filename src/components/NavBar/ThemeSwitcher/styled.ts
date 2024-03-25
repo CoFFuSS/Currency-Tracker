@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import styled, { css } from 'styled-components';
 
 export const ToggleSwitch = styled.div<{ checked: boolean }>`
@@ -33,7 +32,7 @@ export const ToggleSwitch = styled.div<{ checked: boolean }>`
         background-color 0.3s;
     }
     ${theme.media.lg`
-		width: ${theme.spacing(48)}; 
+		width: ${theme.spacing(48)};
 		height: ${theme.spacing(24)};
 		&::before {
 			width: ${theme.spacing(22)};
@@ -78,7 +77,7 @@ export const StyledLabel = styled.label<{ checked: boolean }>`
       height: ${theme.spacing(23)};`}
     }
     ${theme.media.lg`
-		width: ${theme.spacing(48)}; 
+		width: ${theme.spacing(48)};
 		height: ${theme.spacing(24)};
 
 		`}
