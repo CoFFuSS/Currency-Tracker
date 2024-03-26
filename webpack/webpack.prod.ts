@@ -100,7 +100,12 @@ const prodConfig: ConfigFunc<'prod'> = ({ env }) => {
       new ForkTsCheckerWebpackPlugin(),
       new CopyPlugin({
         patterns: [
+					{
+            from: path.resolve(PATHS.public, `mockServiceWorker.js`),
+            to: path.resolve(PATHS.output),
+          },
           {
+
             from: path.resolve(PATHS.public, 'locales'),
             to: path.resolve(PATHS.output, 'locales'),
             noErrorOnMissing: true,
