@@ -7,8 +7,8 @@ import { CurrencyResponse } from '@/types/common';
 export const useCurrencyRequest = () => {
   const [currency, setCurrency] = useState<CurrencyResponse | undefined>();
 
-  const [loading, setLoading]: [boolean, (loading: boolean) => void] = useState<boolean>(true);
-  const [error, setError]: [string, (error: string) => void] = useState('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     const cache = localStorage.getItem('CurrencyCaches');
@@ -38,5 +38,5 @@ export const useCurrencyRequest = () => {
         });
   }, []);
 
-  return { currency, loading, error } as const;
+  return [currency, loading, error] as const;
 };

@@ -25,7 +25,7 @@ export const HomePage = () => {
   const [selectedCurrency, setSelectedCurrency] = useState<string>('USD');
   const [cardCurrency, setCardCurrency] = useState<string>('USD');
   const { isShown, toggle } = useCurrencyModal();
-  const { currency, loading, error } = useCurrencyRequest();
+  const [currency, loading, error] = useCurrencyRequest();
 
   const handleCardClick = (coinCode: string) => () => {
     setCardCurrency(coinCode);
