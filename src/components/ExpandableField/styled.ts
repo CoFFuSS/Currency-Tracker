@@ -16,8 +16,8 @@ export const Container = styled.div`
 
     border-bottom: 1px solid ${theme.colors.gray4};
     ${theme.media.lg`
-		height: ${theme.spacing(44)};
-		border: none;
+      height: ${theme.spacing(44)};
+      border: none;
 		`}
   `}
 `;
@@ -28,7 +28,7 @@ export const Content = styled.div<{ isOpen: boolean }>`
     margin: ${theme.spacing(0, 40)};
     background-color: ${theme.colors.primary};
     ${theme.media.lg`
-		display: flex;
+      display: flex;
 		`}
   `}
 `;
@@ -56,7 +56,11 @@ export const ArrowIcon = styled(Icon)`
     fill: ${theme.colors.secondary};
 
     ${theme.media.lg`
-		display: none;
+      display: none;
 	`}
   `}
+`;
+
+export const Wrapper = styled.div`
+  display: inline-block;
 `;
