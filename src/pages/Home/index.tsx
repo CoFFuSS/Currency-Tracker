@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useCurrencyModal } from '@/hooks/useCurrencyModal';
 import { CurrencyModal } from '@/components/CurrencyModal';
 import { CurrenciesList } from '@/components/CurrenciesList';
-import { CurrencyIcons } from '@/constants';
 import { getCurrenciesName, getDefinedPrice } from '@/utils/mainPage';
 import { useCurrencyRequest } from '@/hooks/useCurrencyRequest';
+import { CurrencyIcons } from '@/constants/currencyIcons';
 
 import {
   Card,
@@ -69,7 +69,7 @@ export const HomePage = () => {
                     <CardInfo>
                       <CardCurrency>{coin.code}</CardCurrency>
                       <CardPrice>
-                        {getDefinedPrice(currency, selectedCurrency, coin.value)}
+                        {getDefinedPrice(currency, selectedCurrency, String(coin.value))}
                       </CardPrice>
                     </CardInfo>
                   </CardItem>

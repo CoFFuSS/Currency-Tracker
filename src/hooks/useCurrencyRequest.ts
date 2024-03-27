@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import { CACHE_LIFETIME } from '@/constants';
 import { CurrencyResponse } from '@/types/common';
+import { CACHE_LIFETIME } from '@/constants/requestConstants';
 
 export const useCurrencyRequest = () => {
   const [currency, setCurrency] = useState<CurrencyResponse | undefined>();

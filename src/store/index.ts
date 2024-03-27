@@ -1,8 +1,8 @@
 import { makeAutoObservable } from 'mobx';
 
 import { darkTheme, lightTheme } from '@/theme';
-import { STORAGE_KEYS } from '@/constants';
 import { Theme } from '@/types/theme';
+import { STORAGE_KEYS } from '@/constants/requestConstants';
 
 class ThemeSwitcher {
   private _theme: Theme = darkTheme;

@@ -13,7 +13,7 @@ export const getSpecificCurrencyValue = (name: string, currency: CurrencyRespons
 export const getDefinedPrice = (
   currency: CurrencyResponse | undefined,
   selectedValue: string,
-  value: string = 'USD',
+  value: string,
 ) => (+value / +getSpecificCurrencyValue(selectedValue, currency)).toFixed(3);
 
 export const getCurrenciesName = (currency: CurrencyResponse | undefined) =>
